@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace Pae.web.Data.Entities
 {
-    public class DeliveryMonth
+    public class Manager 
     {
+        public int Id { get; set; }
+        public Users Users { get; set; }
     }
 }

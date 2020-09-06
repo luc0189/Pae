@@ -15,6 +15,9 @@ namespace Pae.web
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+
+            var seeder = scope.ServiceProvider.GetService<SeedDb>();
+            seeder.SeedAsync().Wait();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

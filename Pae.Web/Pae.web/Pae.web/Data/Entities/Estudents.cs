@@ -16,13 +16,15 @@ namespace Pae.web.Data.Entities
         [Display(Name = "Nombre Completo")]
         public string FullName { get; set; }
 
+
+        [Required(ErrorMessage = "El campo {} es requerido")]
         public Site Site { get; set; }
 
-        public ICollection<SoportAcudienteImage> SoportAcudienteImages  { get; set; }
-        public ICollection<SoportDeliveryImage> SoportDeliveryImages  { get; set; }
-        public ICollection<SoportDocSignatureImage> SoportDocSignatureImages  { get; set; }
-        public ICollection<SoportStudentImage> SoportStudentImages  { get; set; }
 
+        public Acudiente Acudiente { get; set; }
+
+       
+       
 
     }
 }

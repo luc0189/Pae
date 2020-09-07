@@ -1,4 +1,6 @@
-﻿using Pae.web.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Pae.web.Data.Entities;
+using Pae.web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +11,23 @@ namespace Pae.web.Data
     public class SeedDb
     {
         private readonly DataContext _dataContext;
+        private readonly IUserHelper _userHelper;
 
-        public SeedDb(DataContext dataContext)
+        public SeedDb(DataContext dataContext,
+            IUserHelper userHelper)
         {
             _dataContext = dataContext;
+            _userHelper = userHelper;
         }
         public async Task SeedAsync()
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
-            await ChekPositionAsyn();
+            await ChekIntitucionAsyn();
             await ChekSiteAsyn();
-            await ChekAreaAsyn();
-            await ChekExamTypeAsyn();
-            await ChekEndowmentTypeAsyn();
-            await ChekEpsAsyn();
-            await ChekPensionAsyn();
-            await ChekCajaCompAsyn();
+            await ChekStudentAsyn();
+         
+  
             var manager = await CheckUserAsync(1117498993, "Luis Carlos", "Sanchez Cabrera", "luc0189@gmail.com",
                                                 "Calle Luna Calle Sol", "3107957939", "Manager", true);
 
@@ -34,94 +36,126 @@ namespace Pae.web.Data
 
 
         }
-        private async Task ChekEndowmentTypeAsyn()
+      
+
+        private async Task ChekIntitucionAsyn()
         {
-            if (!_dataContext.EndowmentsTypes.Any())
+            if (!_dataContext.Institucions.Any())
             {
-
-                _dataContext.EndowmentsTypes.Add(new EndowmentType
+                _dataContext.Institucions.Add(new Institucion
                 {
 
-                    NameType = "Pantalones",
-                    DateRegistro = DateTime.Now,
-                    UserRegistra = "System",
-                    EspirationDate = 6
-
-
+                    NameIntitucion = "IE AGROECOLOGICO AMAZONICO BUINAIMA"
                 });
-
-                await _dataContext.SaveChangesAsync();
-            }
-        }
-
-        private async Task ChekExamTypeAsyn()
-        {
-            if (!_dataContext.ExamsTypes.Any())
-            {
-
-                _dataContext.ExamsTypes.Add(new ExamsType
+                _dataContext.Institucions.Add(new Institucion
                 {
 
-                    Name = "Manipulacion De Alimentos",
-
+                    NameIntitucion = "IE AGROINDUSTRIAL DE LA AMAZONIA"
                 });
-
-                await _dataContext.SaveChangesAsync();
-            }
-        }
-
-        private async Task ChekPositionAsyn()
-        {
-            if (!_dataContext.PositionEmployees.Any())
-            {
-                _dataContext.PositionEmployees.Add(new PositionEmployee
+                _dataContext.Institucions.Add(new Institucion
                 {
 
-                    Position = "Administrador"
+                    NameIntitucion = "IE ANTONIO RICAURTE "
                 });
-                _dataContext.PositionEmployees.Add(new PositionEmployee
+                _dataContext.Institucions.Add(new Institucion
                 {
 
-                    Position = "Jefe Sistemas"
+                    NameIntitucion = "IE BARRIOS UNIDOS DEL SUR"
                 });
-                _dataContext.PositionEmployees.Add(new PositionEmployee
+                _dataContext.Institucions.Add(new Institucion
                 {
 
-                    Position = "Gerente"
-                });
-                _dataContext.PositionEmployees.Add(new PositionEmployee
+                    NameIntitucion = "IE BELLO HORIZONTE"
+                }); _dataContext.Institucions.Add(new Institucion
                 {
 
-                    Position = "Lider de Tienda"
-                });
+                    NameIntitucion = "IE CIUDADELA SIGLO XXI "
+                }); _dataContext.Institucions.Add(new Institucion
+                {
 
+                    NameIntitucion = "IE DIVINO NIÑO"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE JORGE ELIECER GAITAN"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE JUAN BAUTISTA LA SALLE"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE JUAN BAUTISTA MIGANI"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE LA ESPERANZA"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE LA SALLE"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE LOS ANDES "
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE LOS PINOS"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE NORMAL SUPERIOR"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE SAGRADOS CORAZONES"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE SAN FRANCISCO DE ASIS"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE TECNICO INDUSTRIAL"
+                }); _dataContext.Institucions.Add(new Institucion
+                {
+
+                    NameIntitucion = "IE LOS PINOS"
+                });
                 await _dataContext.SaveChangesAsync();
             }
         }
         private async Task ChekSiteAsyn()
         {
-            if (!_dataContext.SiteHeadquarters.Any())
+            if (!_dataContext.Sites.Any())
             {
-                _dataContext.SiteHeadquarters.Add(new SiteHeadquarters
+                _dataContext.Sites.Add(new Site
                 {
 
-                    Nombre = "Administracion"
+                    NameSite = "SEDE BELLAVISTA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE AGROINDUSTRIAL DE LA AMAZONIA")
+
+
                 });
 
 
                 await _dataContext.SaveChangesAsync();
             }
         }
-        private async Task ChekAreaAsyn()
+        private async Task ChekStudentAsyn()
         {
-            if (!_dataContext.Areas.Any())
+            if (!_dataContext.Estudents.Any())
             {
 
-                _dataContext.Areas.Add(new Area
+                _dataContext.Estudents.Add(new Estudents
                 {
 
-                    Nombre = "Sistemas",
-                    SiteHeadquarters = await _context.SiteHeadquarters.FirstAsync(o => o.Nombre == "Administracion")
+                    Document = 1117523911,
+                    FullName= "SNEIDER  VEGA PALOMARES",
+                    Site= await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
+                    
+                  
                 });
 
 
@@ -129,48 +163,9 @@ namespace Pae.web.Data
             }
         }
 
-        private async Task ChekEpsAsyn()
-        {
-            if (!_dataContext.Eps.Any())
-            {
-                _dataContext.Eps.Add(new Eps
-                {
-
-                    Nombre = "Coomeva"
-                });
-
-
-                await _dataContext.SaveChangesAsync();
-            }
-        }
-        private async Task ChekPensionAsyn()
-        {
-            if (!_dataContext.Pensions.Any())
-            {
-                _dataContext.Pensions.Add(new Pension
-                {
-
-                    Nombre = "Porvenir"
-                });
-
-
-                await _dataContext.SaveChangesAsync();
-            }
-        }
-        private async Task ChekCajaCompAsyn()
-        {
-            if (!_dataContext.CajaCompensacions.Any())
-            {
-                _dataContext.CajaCompensacions.Add(new CajaCompensacion
-                {
-
-                    Nombre = "Comfaca"
-                });
-
-
-                await _dataContext.SaveChangesAsync();
-            }
-        }
+      
+       
+      
 
         private async Task CheckManagerAsync(Users user)
         {
@@ -179,7 +174,7 @@ namespace Pae.web.Data
                 _dataContext.Managers.Add(new Manager
                 {
 
-                    User = user
+                    Users = user
                 });
                 await _dataContext.SaveChangesAsync();
             }

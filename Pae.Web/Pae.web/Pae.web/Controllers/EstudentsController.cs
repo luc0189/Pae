@@ -7,16 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pae.web.Data;
 using Pae.web.Data.Entities;
+using Pae.web.Helpers;
+using Pae.web.Models;
 
 namespace Pae.web.Controllers
 {
     public class EstudentsController : Controller
     {
         private readonly DataContext _context;
+        private readonly ICombosHelpers _combosHelpers;
+        private readonly IConverterHelper _converterHelper;
 
-        public EstudentsController(DataContext context)
+        public EstudentsController(DataContext context,
+            ICombosHelpers combosHelpers,
+            IConverterHelper converterHelper)
         {
             _context = context;
+            _combosHelpers = combosHelpers;
+            _converterHelper = converterHelper;
         }
 
         // GET: Estudents
@@ -68,9 +76,7 @@ namespace Pae.web.Controllers
             return View();
         }
 
-        // POST: Estudents/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Document,FullName")] Estudents estudents)
@@ -167,6 +173,49 @@ namespace Pae.web.Controllers
         private bool EstudentsExists(int id)
         {
             return _context.Estudents.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> AddDeliveryActa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var employe = await _context.Estudents.FindAsync(id);
+            if (employe == null)
+            {
+                return NotFound();
+            }
+            var model = new DeliveryActaViewModel
+            {
+
+                EstudentId = employe.Id,
+                
+                Periodos = _combosHelpers.GetComboPeriodoTypes(),
+                Usucrea = User.Identity.Name
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddDeliveryActa(DeliveryActaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelfull = new DeliveryActaViewModel
+                {
+                   EstudentId=model.EstudentId,
+                    Usucrea=User.Identity.Name,
+                    PeriodoId= model.PeriodoId,
+                    Periodos=model.Periodos,
+                   
+                };
+                var examen = await _converterHelper.ToCreditAsync(modelfull, true);
+                _context.DeliveryActas.Add(examen);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.EstudentId}");
+            }
+            model.Periodos = _combosHelpers.GetComboPeriodoTypes();
+            return View(model);
         }
     }
 }

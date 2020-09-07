@@ -17,6 +17,7 @@ namespace Pae.web.Data
       
         public DbSet<Periodos> Periodos { get; set; }
         public DbSet<DetailsDelivery> DetailsDeliveries { get; set; }
+        public DbSet<DeliveryActa> DeliveryActas { get; set; }
         public DbSet<Estudents> Estudents { get; set; }
         public DbSet<Institucion> Institucions { get; set; }
         public DbSet<Manager> Managers { get; set; }

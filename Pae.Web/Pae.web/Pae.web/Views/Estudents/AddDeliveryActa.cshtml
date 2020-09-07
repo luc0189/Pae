@@ -1,0 +1,34 @@
+﻿@model Pae.web.Models.DeliveryActaViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+<hr />
+<form asp-action="AddDeliveryActa">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Create</h2>
+                    <h4>Acta</h4>
+                </div>
+                <div class="panel-body">
+                    <input type="hidden" asp-for="EstudentId" />
+                    
+
+                    <partial name="_DeliveryActa" />
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <a asp-action="Details" asp-route-id="@Model.EstudentId" class="btn btn-success">Back to Employed</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>

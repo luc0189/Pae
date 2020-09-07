@@ -1,0 +1,14 @@
+﻿@model Pae.web.Models.DeliveryActaViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+ 
+
+<div class="form-group">
+    <label asp-for="PeriodoId" class="control-label"></label>
+    <select asp-for="PeriodoId" asp-items="Model.Periodos" class="form-control">
+    </select>
+    <span asp-validation-for="PeriodoId" class="text-danger"></span>
+</div>
+

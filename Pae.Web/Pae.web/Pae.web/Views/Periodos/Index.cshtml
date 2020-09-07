@@ -1,30 +1,26 @@
-﻿@model IEnumerable<Pae.web.Data.Entities.Estudents>
+﻿@model IEnumerable<Pae.web.Data.Entities.Periodos>
 
 @{
     ViewData["Title"] = "Index";
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-
-
 <hr />
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a asp-action="Create" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Create New Estudent</a>
+                <a asp-action="Create" class="btn btn-primary">Create New Period</a>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped display">
+                    <table class="table table-hover table-striped display" >
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Document)
+                                    @Html.DisplayNameFor(model => model.MonthDelivery)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.FullName)
-                                </th>
-                                <th></th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,21 +28,19 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Document)
+                                        @Html.DisplayFor(modelItem => item.MonthDelivery)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FullName)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" class="btn btn-warning"  asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a> 
-                                        <a asp-action="Details" class="btn btn-info"  asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a> 
-                                        <a asp-action="Delete" class="btn btn-danger"   asp-route-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+              
             </div>
             <div class="panel-footer">
 

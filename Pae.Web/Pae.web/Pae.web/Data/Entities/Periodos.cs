@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Pae.web.Data.Entities
 {
-    public class Delivery
+    public class Periodos
     {
         public int Id { get; set; }
 
         public string MonthDelivery { get; set; }
 
-        public ICollection<DetailsDelivery> DetailsDeliveries { get; set; }
+        public ICollection<DeliveryActa> DeliveryActas { get; set; }
 
 
     }

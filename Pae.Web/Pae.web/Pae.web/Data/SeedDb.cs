@@ -157,7 +157,15 @@ namespace Pae.web.Data
                     
                   
                 });
+                _dataContext.Estudents.Add(new Estudents
+                {
 
+                    Document = 1117935724,
+                    FullName = "DIYER ESNEIDER LOPEZ VARGAS",
+                    Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
+
+
+                });
 
                 await _dataContext.SaveChangesAsync();
             }

@@ -10,25 +10,22 @@ using Pae.web.Data.Entities;
 
 namespace Pae.web.Controllers
 {
-    public class DeliveriesController : Controller
+    public class PeriodosController : Controller
     {
         private readonly DataContext _context;
 
-        public DeliveriesController(DataContext context)
+        public PeriodosController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Deliveries
+        // GET: Periodos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Deliveries
-                .Include(m => m.DetailsDeliveries)
-               
-                .ToListAsync());
+            return View(await _context.Periodos.ToListAsync());
         }
 
-        // GET: Deliveries/Details/5
+        // GET: Periodos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,51 +33,39 @@ namespace Pae.web.Controllers
                 return NotFound();
             }
 
-            var delivery = await _context.Deliveries
-                .Include(m=> m.DetailsDeliveries)
-                .ThenInclude(e=> e.Estudents)
-                 .Include(m => m.DetailsDeliveries)
-                .ThenInclude(e=> e.Acudiente)
-                .Include(m => m.DetailsDeliveries)
-                .ThenInclude(e => e.SoportAcudienteImages)
-                .Include(m => m.DetailsDeliveries)
-                .ThenInclude(e=>e.SoportStudentImages)
-               .Include(m => m.DetailsDeliveries)
-                .ThenInclude(e => e.SoportDocSignatureImages)
-                .Include(m => m.DetailsDeliveries)
-                .ThenInclude(e => e.SoportDeliveryImages)
+            var periodos = await _context.Periodos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (delivery == null)
+            if (periodos == null)
             {
                 return NotFound();
             }
 
-            return View(delivery);
+            return View(periodos);
         }
 
-        // GET: Deliveries/Create
+        // GET: Periodos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Deliveries/Create
+        // POST: Periodos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MonthDelivery")] Delivery delivery)
+        public async Task<IActionResult> Create([Bind("Id,MonthDelivery")] Periodos periodos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(delivery);
+                _context.Add(periodos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(delivery);
+            return View(periodos);
         }
 
-        // GET: Deliveries/Edit/5
+        // GET: Periodos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,22 +73,22 @@ namespace Pae.web.Controllers
                 return NotFound();
             }
 
-            var delivery = await _context.Deliveries.FindAsync(id);
-            if (delivery == null)
+            var periodos = await _context.Periodos.FindAsync(id);
+            if (periodos == null)
             {
                 return NotFound();
             }
-            return View(delivery);
+            return View(periodos);
         }
 
-        // POST: Deliveries/Edit/5
+        // POST: Periodos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MonthDelivery")] Delivery delivery)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MonthDelivery")] Periodos periodos)
         {
-            if (id != delivery.Id)
+            if (id != periodos.Id)
             {
                 return NotFound();
             }
@@ -112,12 +97,12 @@ namespace Pae.web.Controllers
             {
                 try
                 {
-                    _context.Update(delivery);
+                    _context.Update(periodos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DeliveryExists(delivery.Id))
+                    if (!PeriodosExists(periodos.Id))
                     {
                         return NotFound();
                     }
@@ -128,10 +113,10 @@ namespace Pae.web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(delivery);
+            return View(periodos);
         }
 
-        // GET: Deliveries/Delete/5
+        // GET: Periodos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,30 +124,30 @@ namespace Pae.web.Controllers
                 return NotFound();
             }
 
-            var delivery = await _context.Deliveries
+            var periodos = await _context.Periodos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (delivery == null)
+            if (periodos == null)
             {
                 return NotFound();
             }
 
-            return View(delivery);
+            return View(periodos);
         }
 
-        // POST: Deliveries/Delete/5
+        // POST: Periodos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var delivery = await _context.Deliveries.FindAsync(id);
-            _context.Deliveries.Remove(delivery);
+            var periodos = await _context.Periodos.FindAsync(id);
+            _context.Periodos.Remove(periodos);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DeliveryExists(int id)
+        private bool PeriodosExists(int id)
         {
-            return _context.Deliveries.Any(e => e.Id == id);
+            return _context.Periodos.Any(e => e.Id == id);
         }
     }
 }

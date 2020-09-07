@@ -9,22 +9,59 @@ namespace Pae.web.Data.Entities
     public class DetailsDelivery
     {
         public int Id { get; set; }
+
+        [Display(Name ="Sitio de Entrega")]
+        [Required(ErrorMessage ="El campo {0} es Requerido")]
+        [MaxLength(120)]
         public string SiteDelivery { get; set; }
 
-        public Estudents Estudents { get; set; }
+        [Display(Name = "Documento Acudiente")]
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
+        public int DocAcudiente { get; set; }
 
-        public Acudiente Acudiente { get; set; }
-        public Delivery Delivery { get; set; }
+        [Display(Name = "Nombre Acudiente")]
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
+        [MaxLength(120)]
+        public string FullNameAcudiente { get; set; }
 
-        public ICollection<SoportAcudienteImage> SoportAcudienteImages { get; set; }
+        [Display(Name = "Telefono Movil")]
+        public int  TelMovil { get; set; }
 
-        [Required(ErrorMessage = "El campo {} es requerido")]
-        public ICollection<SoportDeliveryImage> SoportDeliveryImages { get; set; }
+        [Display(Name = "Image")]
+        public string ImageUrl { get; set; }
+        public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{ImageUrl.Substring(1)}";
 
-        [Required(ErrorMessage = "El campo {} es requerido")]
-        public ICollection<SoportDocSignatureImage> SoportDocSignatureImages { get; set; }
 
-        [Required(ErrorMessage = "El campo {} es requerido")]
-        public ICollection<SoportStudentImage> SoportStudentImages { get; set; }
+        [Display(Name = "Image Acudiente")]
+        public string ImageAcudienteUrl { get; set; }
+        public string ImageAcudienteFullPath => string.IsNullOrEmpty(ImageAcudienteUrl)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{ImageAcudienteUrl.Substring(1)}";
+
+
+        [Display(Name = "Image Entrega")]
+        public string ImageDeliveryUrl { get; set; }
+        public string ImageDeliveryFullPath => string.IsNullOrEmpty(ImageDeliveryUrl)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{ImageDeliveryUrl.Substring(1)}";
+
+
+        [Display(Name = "Image Acta")]
+        public string ImageActaUrl { get; set; }
+        public string ImageActaFullPath => string.IsNullOrEmpty(ImageActaUrl)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{ImageActaUrl.Substring(1)}";
+
+
+        [Display(Name = "Image Estudiante")]
+        public string ImageStudentUrl { get; set; }
+        public string ImageStudentFullPath => string.IsNullOrEmpty(ImageStudentUrl)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{ImageStudentUrl.Substring(1)}";
+
+        public DeliveryActa DeliveryActa { get; set; }
+
     }
 }

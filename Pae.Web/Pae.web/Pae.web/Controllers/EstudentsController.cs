@@ -34,6 +34,9 @@ namespace Pae.web.Controllers
             }
 
             var estudents = await _context.Estudents
+                .Include(a=>a.Site)
+                .Include(a => a.DeliveryActas)
+                .ThenInclude(d=> d.DetailsDeliveries)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (estudents == null)
             {
@@ -46,6 +49,22 @@ namespace Pae.web.Controllers
         // GET: Estudents/Create
         public IActionResult Create()
         {
+            //var model = new EstudentViewModel
+            //{
+            //    DateRegistro = DateTime.Today,
+
+            //    Areas = _combosHelpers.GetComboAreas(),
+            //    Eps = _combosHelpers.GetComboEps(),
+            //    Pension = _combosHelpers.GetComboPension(),
+            //    CajaCompensacion = _combosHelpers.GetComboCajaCompensacion(),
+            //    PositionEmplooyed = _combosHelpers.GetComboPositionEmploye(),
+            //    //Roles = _combosHelpers.GetComboRoles()
+            //};
+            //model.Areas = _combosHelpers.GetComboAreas();
+            //model.Eps = _combosHelpers.GetComboEps();
+            //model.Pension = _combosHelpers.GetComboPension();
+            //model.CajaCompensacion = _combosHelpers.GetComboCajaCompensacion();
+            //model.PositionEmplooyed = _combosHelpers.GetComboPositionEmploye();
             return View();
         }
 

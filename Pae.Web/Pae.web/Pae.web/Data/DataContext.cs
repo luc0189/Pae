@@ -14,15 +14,13 @@ namespace Pae.web.Data
         {
 
         }
-        public DbSet<Acudiente> Acudientes { get; set; }
-        public DbSet<Delivery> Deliveries { get; set; }
+      
+        public DbSet<Periodos> Periodos { get; set; }
+        public DbSet<DetailsDelivery> DetailsDeliveries { get; set; }
         public DbSet<Estudents> Estudents { get; set; }
         public DbSet<Institucion> Institucions { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Site> Sites { get; set; }
-        public DbSet<SoportAcudienteImage> SoportAcudienteImages { get; set; }
-        public DbSet<SoportDeliveryImage> SoportDeliveryImages { get; set; }
-        public DbSet<SoportDocSignatureImage> SoportDocSignatureImages { get; set; }
-        public DbSet<SoportStudentImage> SoportStudentImages { get; set; }
+       
     }
 }

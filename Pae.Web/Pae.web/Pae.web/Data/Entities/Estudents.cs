@@ -17,9 +17,8 @@ namespace Pae.web.Data.Entities
         public string FullName { get; set; }
 
         
-
-        [Required(ErrorMessage = "El campo {} es requerido")]
         public Site Site { get; set; }
+        public ICollection<DeliveryActa> DeliveryActas { get; set; }
 
 
 

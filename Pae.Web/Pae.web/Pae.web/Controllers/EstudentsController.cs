@@ -33,7 +33,7 @@ namespace Pae.web.Controllers
             return View(await _context.Estudents.ToListAsync());
         }
 
-        // GET: Estudents/Details/5
+        // GET: Estudents/Details/5 DetailsActa
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +45,8 @@ namespace Pae.web.Controllers
                 .Include(a=>a.Site)
                 .Include(a => a.DeliveryActas)
                 .ThenInclude(d=> d.DetailsDeliveries)
+                .Include(a => a.DeliveryActas)
+                .ThenInclude(p=>p.Periodos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (estudents == null)
             {
@@ -216,6 +218,51 @@ namespace Pae.web.Controllers
             }
             model.Periodos = _combosHelpers.GetComboPeriodoTypes();
             return View(model);
+        }
+
+        public async Task<IActionResult> DetailsActa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var acta = await _context.DeliveryActas
+                .Include(e=> e.Estudents)
+                .Include(p=> p.Periodos)
+                .Include(a=> a.DetailsDeliveries)
+                .FirstOrDefaultAsync(a=> a.Id==id);
+            if (acta == null)
+            {
+                return NotFound();
+            }
+            var model = new DetailsActaViewModel
+            {
+               
+                StudentId=acta.Estudents.Id,
+                
+            };
+
+
+            return View(acta);
+        }
+        public async Task<IActionResult> DetailsDataActa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var acta = await _context.DetailsDeliveries
+                .Include(e => e.DeliveryActa)
+                .ThenInclude(p => p.Periodos)
+                
+                .FirstOrDefaultAsync(a => a.Id == id);
+            if (acta == null)
+            {
+                return NotFound();
+            }
+           
+
+            return View(acta);
         }
     }
 }

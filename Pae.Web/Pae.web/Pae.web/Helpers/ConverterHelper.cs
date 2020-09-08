@@ -35,6 +35,23 @@ namespace Pae.web.Helpers
 
             };
         }
-      
+
+        public  DetailsDelivery ToDetailsDeliveryAsync(DetailsActaViewModel model, bool isNew)
+        {
+            //int mes = int.Parse(model.DeadlinePay.ToString());
+            return new DetailsDelivery
+            {
+                Id = isNew ? 0 : model.Id,
+                DocAcudiente=model.DocAcudiente,
+                FullNameAcudiente=model.FullNameAcudiente,
+                ImageActaUrl=model.ImageActaUrl,
+                ImageAcudienteUrl=model.ImageAcudienteUrl,
+                ImageDeliveryUrl=model.ImageDeliveryUrl,
+                ImageStudentUrl=model.ImageStudentUrl,
+                SiteDelivery=model.SiteDelivery,
+                TelMovil=model.TelMovil
+            };
+        }
+
     }
 }

@@ -19,6 +19,26 @@ namespace Pae.web.Helpers
             _dataContext = dataContext;
             _combosHelpers = combosHelpers;
         }
+        
+               public async Task<DetailsDelivery> ToDetailDataActaAsync(DetailsActaViewModel model, bool isNew)
+        {
+            //int mes = int.Parse(model.DeadlinePay.ToString());
+            return new DetailsDelivery
+            {
+                Id = isNew ? 0 : model.Id,
+                DeliveryActa= await _dataContext.DeliveryActas.FindAsync(model.ActaId),
+                DocAcudiente=model.DocAcudiente,
+                FullNameAcudiente=model.FullNameAcudiente,
+                TelMovil=model.TelMovil,
+                SiteDelivery=model.SiteDelivery,
+                ImageStudentUrl=model.ImageStudentUrl,
+                ImageActaUrl=model.ImageActaUrl,
+                ImageAcudienteUrl=model.ImageAcudienteUrl,
+                ImageDeliveryUrl=model.ImageDeliveryUrl
+
+
+            };
+        }
 
         public async Task<DeliveryActa> ToCreditAsync(DeliveryActaViewModel model, bool isNew)
         {

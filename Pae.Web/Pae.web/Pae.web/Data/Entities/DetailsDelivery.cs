@@ -27,12 +27,7 @@ namespace Pae.web.Data.Entities
         [Display(Name = "Telefono Movil")]
         public int  TelMovil { get; set; }
 
-        [Display(Name = "Image")]
-        public string ImageUrl { get; set; }
-        public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
-                ? null :
-                $"https://intranetweblcs.azurewebsites.net{ImageUrl.Substring(1)}";
-
+       
 
         [Display(Name = "Image Acudiente")]
         public string ImageAcudienteUrl { get; set; }

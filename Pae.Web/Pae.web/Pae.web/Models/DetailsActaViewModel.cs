@@ -30,8 +30,6 @@ namespace Pae.web.Models
         [Display(Name = "Telefono Movil")]
         public int TelMovil { get; set; }
 
-        [Display(Name = "Image")]
-        public string ImageUrl { get; set; }
        
 
         [Display(Name = "Image Acudiente")]

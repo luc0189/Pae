@@ -42,11 +42,11 @@ namespace Pae.web.Controllers
             }
 
             var estudents = await _context.Estudents
-                .Include(a=>a.Site)
+                .Include(a => a.Site)
                 .Include(a => a.DeliveryActas)
-                .ThenInclude(d=> d.DetailsDeliveries)
+                .ThenInclude(d => d.DetailsDeliveries)
                 .Include(a => a.DeliveryActas)
-                .ThenInclude(p=>p.Periodos)
+                .ThenInclude(p => p.Periodos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (estudents == null)
             {
@@ -78,7 +78,7 @@ namespace Pae.web.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Document,FullName")] Estudents estudents)
@@ -192,7 +192,7 @@ namespace Pae.web.Controllers
             {
 
                 EstudentId = employe.Id,
-                
+
                 Periodos = _combosHelpers.GetComboPeriodoTypes(),
                 Usucrea = User.Identity.Name
             };
@@ -205,11 +205,11 @@ namespace Pae.web.Controllers
             {
                 var modelfull = new DeliveryActaViewModel
                 {
-                   EstudentId=model.EstudentId,
-                    Usucrea=User.Identity.Name,
-                    PeriodoId= model.PeriodoId,
-                    Periodos=model.Periodos,
-                   
+                    EstudentId = model.EstudentId,
+                    Usucrea = User.Identity.Name,
+                    PeriodoId = model.PeriodoId,
+                    Periodos = model.Periodos,
+
                 };
                 var examen = await _converterHelper.ToCreditAsync(modelfull, true);
                 _context.DeliveryActas.Add(examen);
@@ -227,19 +227,19 @@ namespace Pae.web.Controllers
                 return NotFound();
             }
             var acta = await _context.DeliveryActas
-                .Include(e=> e.Estudents)
-                .Include(p=> p.Periodos)
-                .Include(a=> a.DetailsDeliveries)
-                .FirstOrDefaultAsync(a=> a.Id==id);
+                .Include(e => e.Estudents)
+                .Include(p => p.Periodos)
+                .Include(a => a.DetailsDeliveries)
+                .FirstOrDefaultAsync(a => a.Id == id);
             if (acta == null)
             {
                 return NotFound();
             }
             var model = new DetailsActaViewModel
             {
-               
-                StudentId=acta.Estudents.Id,
-                
+
+                StudentId = acta.Estudents.Id,
+
             };
 
 
@@ -251,18 +251,54 @@ namespace Pae.web.Controllers
             {
                 return NotFound();
             }
-            var acta = await _context.DetailsDeliveries
-                .Include(e => e.DeliveryActa)
-                .ThenInclude(p => p.Periodos)
-                
+            var acta = await _context.DeliveryActas
+                .Include(e => e.DetailsDeliveries)
+                .Include(p => p.Periodos)
+                .Include(s => s.Estudents)
+
                 .FirstOrDefaultAsync(a => a.Id == id);
             if (acta == null)
             {
                 return NotFound();
             }
-           
+            var model = new DetailsActaViewModel
+            {
+                ActaId = acta.Id,
+                StudentId = acta.Estudents.Id
 
-            return View(acta);
+            };
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DetailsDataActa(DetailsActaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelfull = new DetailsActaViewModel
+                {
+                    StudentId = model.StudentId,
+                    DocAcudiente = model.DocAcudiente,
+                    ActaId = model.ActaId,
+                    ImageActaUrl = model.ImageActaUrl,
+                    ImageAcudienteUrl = model.ImageAcudienteUrl,
+                    ImageDeliveryUrl = model.ImageDeliveryUrl,
+                    ImageStudentUrl = model.ImageStudentUrl,
+                    SiteDelivery = model.SiteDelivery,
+                    TelMovil = model.TelMovil,
+
+
+                };
+                var examen = await _converterHelper.ToDetailDataActaAsync(modelfull, true);
+                _context.DetailsDeliveries.Add(examen);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.StudentId}");
+            }
+          
+            return View(model);
+            }
         }
     }
-}
+

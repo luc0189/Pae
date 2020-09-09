@@ -50,15 +50,11 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                   HEY DATA AQUI
+                                    <a asp-action="DetailsDataActa" class="btn btn-primary" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-plus"></i> Add Data</a>
                                    
 
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
                     </div>
@@ -70,7 +66,9 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    hola
+                                    <h2>
+                                        Details Acta Delivery
+                                    </h2>
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
@@ -147,7 +145,7 @@
             <div class="panel-footer">
                 <div class="form-group">
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a asp-action="DetailsDataActa" class="btn btn-primary" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-plus"></i> Add Data</a>
+                    
                     <a asp-action="Details" asp-route-id="@Model.Estudents.Id" class="btn btn-success">Back to List</a>
                 </div>
             </div>

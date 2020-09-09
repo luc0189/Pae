@@ -281,7 +281,9 @@ namespace Pae.web.Controllers
                 {
                     StudentId = model.StudentId,
                     DocAcudiente = model.DocAcudiente,
-                    ActaId = model.ActaId,
+                    FullNameAcudiente=model.FullNameAcudiente,
+                    ActaId=model.ActaId,
+                    
                     ImageActaUrl = model.ImageActaUrl,
                     ImageAcudienteUrl = model.ImageAcudienteUrl,
                     ImageDeliveryUrl = model.ImageDeliveryUrl,

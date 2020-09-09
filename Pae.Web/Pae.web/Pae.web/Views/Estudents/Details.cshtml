@@ -59,7 +59,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
 
-                                    <a asp-action="AddDeliveryActa" class="btn btn-primary" asp-route-id="@Model.Id">Add Acta</a>
+                                    <a asp-action="AddDeliveryActa" class="btn btn-primary" asp-route-id="@Model.Id">Add Acta Delivery</a>
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
@@ -73,7 +73,7 @@
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Periodos.MonthDelivery)
                                                     </th>
                                                     <th>
-                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().DetailsDeliveries.Count)
+                                                       (#1) Entregado 
                                                     </th>
                                                     <th>
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Usucrea)
@@ -124,7 +124,7 @@
             <div class="panel-footer">
                 <div class="form-group">
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a asp-action="AddDelivery" class="btn btn-primary" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-plus"></i> Add Delivery Acta</a>
+                    <a asp-action="AddDeliveryActa" class="btn btn-primary" asp-route-id="@Model.Id">Add Acta Delivery</a>
                     <a asp-action="Index" class="btn btn-success">Back to List</a>
                 </div>
             </div>

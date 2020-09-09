@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pae.web.Data;
 
 namespace Pae.web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200909055319_longTelMOvil1")]
+    partial class longTelMOvil1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,9 +202,6 @@ namespace Pae.web.Migrations
                     b.Property<int>("Document");
 
                     b.Property<string>("FullName")
-                        .IsRequired();
-
-                    b.Property<string>("Mesa")
                         .IsRequired();
 
                     b.Property<int?>("SiteId");

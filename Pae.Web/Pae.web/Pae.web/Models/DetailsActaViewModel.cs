@@ -18,6 +18,7 @@ namespace Pae.web.Models
         [MaxLength(120)]
         public string SiteDelivery { get; set; }
 
+
         [Display(Name = "Documento Acudiente")]
         [Required(ErrorMessage = "El campo {0} es Requerido")]
         public int DocAcudiente { get; set; }
@@ -28,26 +29,26 @@ namespace Pae.web.Models
         public string FullNameAcudiente { get; set; }
 
         [Display(Name = "Telefono Movil")]
-        public int TelMovil { get; set; }
+        public long TelMovil { get; set; }
 
-       
 
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Acudiente")]
         public string ImageAcudienteUrl { get; set; }
-     
 
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Entrega")]
         public string ImageDeliveryUrl { get; set; }
-       
 
 
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Acta")]
         public string ImageActaUrl { get; set; }
         public string ImageActaFullPath => string.IsNullOrEmpty(ImageActaUrl)
                 ? null :
                 $"https://intranetweblcs.azurewebsites.net{ImageActaUrl.Substring(1)}";
 
-
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Estudiante")]
         public string ImageStudentUrl { get; set; }
         public string ImageStudentFullPath => string.IsNullOrEmpty(ImageStudentUrl)

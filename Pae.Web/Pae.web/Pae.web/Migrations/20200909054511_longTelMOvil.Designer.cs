@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pae.web.Data;
 
 namespace Pae.web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200909054511_longTelMOvil")]
+    partial class longTelMOvil
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,17 +168,13 @@ namespace Pae.web.Migrations
                         .IsRequired()
                         .HasMaxLength(120);
 
-                    b.Property<string>("ImageActaUrl")
-                        .IsRequired();
+                    b.Property<string>("ImageActaUrl");
 
-                    b.Property<string>("ImageAcudienteUrl")
-                        .IsRequired();
+                    b.Property<string>("ImageAcudienteUrl");
 
-                    b.Property<string>("ImageDeliveryUrl")
-                        .IsRequired();
+                    b.Property<string>("ImageDeliveryUrl");
 
-                    b.Property<string>("ImageStudentUrl")
-                        .IsRequired();
+                    b.Property<string>("ImageStudentUrl");
 
                     b.Property<string>("SiteDelivery")
                         .IsRequired()
@@ -200,9 +198,6 @@ namespace Pae.web.Migrations
                     b.Property<int>("Document");
 
                     b.Property<string>("FullName")
-                        .IsRequired();
-
-                    b.Property<string>("Mesa")
                         .IsRequired();
 
                     b.Property<int?>("SiteId");

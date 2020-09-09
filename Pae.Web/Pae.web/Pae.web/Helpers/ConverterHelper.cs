@@ -28,7 +28,7 @@ namespace Pae.web.Helpers
                 Id = isNew ? 0 : model.Id,
                 DeliveryActa= await _dataContext.DeliveryActas.FindAsync(model.ActaId),
                 DocAcudiente=model.DocAcudiente,
-                FullNameAcudiente=model.FullNameAcudiente,
+               FullNameAcudiente=model.FullNameAcudiente,
                 TelMovil=model.TelMovil,
                 SiteDelivery=model.SiteDelivery,
                 ImageStudentUrl=model.ImageStudentUrl,

@@ -25,24 +25,24 @@ namespace Pae.web.Data.Entities
         public string FullNameAcudiente { get; set; }
 
         [Display(Name = "Telefono Movil")]
-        public int  TelMovil { get; set; }
+        public long  TelMovil { get; set; }
 
        
-
+        [Required (ErrorMessage ="El campo {0} es Requerido")]
         [Display(Name = "Image Acudiente")]
         public string ImageAcudienteUrl { get; set; }
         public string ImageAcudienteFullPath => string.IsNullOrEmpty(ImageAcudienteUrl)
                 ? null :
                 $"https://intranetweblcs.azurewebsites.net{ImageAcudienteUrl.Substring(1)}";
 
-
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Entrega")]
         public string ImageDeliveryUrl { get; set; }
         public string ImageDeliveryFullPath => string.IsNullOrEmpty(ImageDeliveryUrl)
                 ? null :
                 $"https://intranetweblcs.azurewebsites.net{ImageDeliveryUrl.Substring(1)}";
 
-
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Acta")]
         public string ImageActaUrl { get; set; }
         public string ImageActaFullPath => string.IsNullOrEmpty(ImageActaUrl)
@@ -50,6 +50,7 @@ namespace Pae.web.Data.Entities
                 $"https://intranetweblcs.azurewebsites.net{ImageActaUrl.Substring(1)}";
 
 
+        [Required(ErrorMessage = "El campo {0} es Requerido")]
         [Display(Name = "Image Estudiante")]
         public string ImageStudentUrl { get; set; }
         public string ImageStudentFullPath => string.IsNullOrEmpty(ImageStudentUrl)

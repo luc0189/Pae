@@ -16,7 +16,10 @@ namespace Pae.web.Data.Entities
         [Display(Name = "Nombre Completo")]
         public string FullName { get; set; }
 
-        
+        [Required(ErrorMessage = "El campo {} es requerido")]
+        [Display(Name = "Mesa")]
+        public string Mesa { get; set; }
+
         public Site Site { get; set; }
         public ICollection<DeliveryActa> DeliveryActas { get; set; }
 

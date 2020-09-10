@@ -153,7 +153,7 @@ namespace Pae.web.Data
 
                     Document = 1117523911,
                     FullName = "SNEIDER  VEGA PALOMARES",
-                    Mesa = "Mesa 1",
+                    //Mesa = "Mesa 1",
                     Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
 
 
@@ -163,7 +163,7 @@ namespace Pae.web.Data
 
                     Document = 1117935724,
                     FullName = "DIYER ESNEIDER LOPEZ VARGAS",
-                    Mesa = "Mesa 2",
+                    //Mesa = "Mesa 2",
                     Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
 
 

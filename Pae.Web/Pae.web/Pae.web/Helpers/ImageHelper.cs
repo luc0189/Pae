@@ -9,13 +9,13 @@ namespace Pae.web.Helpers
 {
     public class ImageHelper : IImageHelper
     {
-        public async Task<string> UploadImageAsync(IFormFile imageFile)
+        public async Task<string> UploadImageAsync(IFormFile imageFile,string ruta,string urlImage)
         {
             var guid = Guid.NewGuid().ToString();
             var file = $"{guid}.jpg";
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
-                "wwwroot\\images\\Employe",
+                ruta,
                 file);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -23,7 +23,7 @@ namespace Pae.web.Helpers
                 await imageFile.CopyToAsync(stream);
             }
 
-            return $"~/images/Employe/{file}";
+            return $"{urlImage}{file}";
         }
     }
 }

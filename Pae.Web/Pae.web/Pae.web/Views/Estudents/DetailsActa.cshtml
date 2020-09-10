@@ -91,6 +91,12 @@
                                                         Img1
                                                     </th>
                                                     <th>
+                                                        Img2
+                                                    </th>
+                                                    <th>
+                                                        Img Delivery
+                                                    </th>
+                                                    <th>
                                                         Acciones
                                                     </th>
                                                 </tr>
@@ -98,36 +104,52 @@
                                             <tbody>
                                                 @foreach (var item in Model.DetailsDeliveries)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.DocAcudiente)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.FullNameAcudiente)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.SiteDelivery)
-                                                        </td>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DocAcudiente)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FullNameAcudiente)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SiteDelivery)
+                                                    </td>
 
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.TelMovil)
-                                                        </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.TelMovil)
+                                                    </td>
 
-                                                        <td>
-                                                            @if (!string.IsNullOrEmpty(item.ImageAcudienteUrl))
-                                                            {
-                                                                <div class="thumbnail">
-                                                                    <img src="@Url.Content(item.ImageAcudienteUrl)" alt="Image" style="width:150px;height:150px;" />
-                                                                </div>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                            <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(item.Imagedocl))
+                                                        {
 
-                                                            <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                            <img src="@Url.Content(item.Imagedocl)" alt="Image" style="width:100px;height:100px;" />
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(item.Imagedoc2))
+                                                        {
+
+                                                            <img src="@Url.Content(item.Imagedoc2)" alt="Image" style="width:100px;height:100px;" />
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(item.ImageDeliveryUrl))
+                                                        {
+
+                                                            <img src="@Url.Content(item.ImageDeliveryUrl)" alt="Image" style="width:100px;height:100px;" />
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                        <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+
+                                                        <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                                    </td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -145,8 +167,10 @@
             <div class="panel-footer">
                 <div class="form-group">
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                    
+
                     <a asp-action="Details" asp-route-id="@Model.Estudents.Id" class="btn btn-success">Back to List</a>
+
+                    <a asp-action="Index" asp-route-id="@Model.Estudents.Id" class="btn btn-success"><i class="glyphicon glyphicon-home"></i> Home</a>
                 </div>
             </div>
         </div>

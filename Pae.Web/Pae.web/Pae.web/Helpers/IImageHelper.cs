@@ -8,6 +8,6 @@ namespace Pae.web.Helpers
 {
    public interface IImageHelper
     {
-        Task<string> UploadImageAsync(IFormFile imageFile);
+        Task<string> UploadImageAsync(IFormFile imageFile,string ruta,string urlImage);
     }
 }

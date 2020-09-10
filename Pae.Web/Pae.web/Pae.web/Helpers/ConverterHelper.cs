@@ -31,9 +31,8 @@ namespace Pae.web.Helpers
                FullNameAcudiente=model.FullNameAcudiente,
                 TelMovil=model.TelMovil,
                 SiteDelivery=model.SiteDelivery,
-                ImageStudentUrl=model.ImageStudentUrl,
-                ImageActaUrl=model.ImageActaUrl,
-                ImageAcudienteUrl=model.ImageAcudienteUrl,
+                Imagedocl=model.Imagedocl,
+                Imagedoc2=model.Imagedoc2,
                 ImageDeliveryUrl=model.ImageDeliveryUrl
 
 
@@ -64,10 +63,10 @@ namespace Pae.web.Helpers
                 Id = isNew ? 0 : model.Id,
                 DocAcudiente=model.DocAcudiente,
                 FullNameAcudiente=model.FullNameAcudiente,
-                ImageActaUrl=model.ImageActaUrl,
-                ImageAcudienteUrl=model.ImageAcudienteUrl,
+                
+                
                 ImageDeliveryUrl=model.ImageDeliveryUrl,
-                ImageStudentUrl=model.ImageStudentUrl,
+               
                 SiteDelivery=model.SiteDelivery,
                 TelMovil=model.TelMovil
             };

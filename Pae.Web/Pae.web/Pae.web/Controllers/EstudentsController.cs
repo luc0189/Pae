@@ -17,14 +17,17 @@ namespace Pae.web.Controllers
         private readonly DataContext _context;
         private readonly ICombosHelpers _combosHelpers;
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
         public EstudentsController(DataContext context,
             ICombosHelpers combosHelpers,
-            IConverterHelper converterHelper)
+            IConverterHelper converterHelper,
+            IImageHelper imageHelper)
         {
             _context = context;
             _combosHelpers = combosHelpers;
             _converterHelper = converterHelper;
+           _imageHelper = imageHelper;
         }
 
         // GET: Estudents
@@ -59,22 +62,8 @@ namespace Pae.web.Controllers
         // GET: Estudents/Create
         public IActionResult Create()
         {
-            //var model = new EstudentViewModel
-            //{
-            //    DateRegistro = DateTime.Today,
+         
 
-            //    Areas = _combosHelpers.GetComboAreas(),
-            //    Eps = _combosHelpers.GetComboEps(),
-            //    Pension = _combosHelpers.GetComboPension(),
-            //    CajaCompensacion = _combosHelpers.GetComboCajaCompensacion(),
-            //    PositionEmplooyed = _combosHelpers.GetComboPositionEmploye(),
-            //    //Roles = _combosHelpers.GetComboRoles()
-            //};
-            //model.Areas = _combosHelpers.GetComboAreas();
-            //model.Eps = _combosHelpers.GetComboEps();
-            //model.Pension = _combosHelpers.GetComboPension();
-            //model.CajaCompensacion = _combosHelpers.GetComboCajaCompensacion();
-            //model.PositionEmplooyed = _combosHelpers.GetComboPositionEmploye();
             return View();
         }
 
@@ -277,17 +266,42 @@ namespace Pae.web.Controllers
         {
             if (ModelState.IsValid)
             {
+                string ruta = "";
+                string ruta2 = "";
+                var frente = string.Empty;
+                var reverso = string.Empty;
+                var delivery = string.Empty;
+
+                if (model.ImageDocfrente != null)
+                {
+                    ruta = "wwwroot\\images\\Actas";
+                    ruta2 = "~/images/Actas/";
+                    frente = await _imageHelper.UploadImageAsync(model.ImageDocfrente,ruta,ruta2);
+                }
+                if (model.ImageDocReverso != null)
+                {
+                    
+                    ruta = "wwwroot\\images\\Actas";
+                    ruta2 = "~/images/Actas/";
+                    reverso = await _imageHelper.UploadImageAsync(model.ImageDocReverso,ruta,ruta2);
+                }
+                if (model.ImageDelivery != null)
+                {
+                    ruta = "wwwroot\\images\\Deliveries";
+                    ruta2 = "~/images/Deliveries/";
+                    delivery = await _imageHelper.UploadImageAsync(model.ImageDelivery,ruta,ruta2);
+                }
+
+               
                 var modelfull = new DetailsActaViewModel
                 {
                     StudentId = model.StudentId,
                     DocAcudiente = model.DocAcudiente,
                     FullNameAcudiente=model.FullNameAcudiente,
                     ActaId=model.ActaId,
-                    
-                    ImageActaUrl = model.ImageActaUrl,
-                    ImageAcudienteUrl = model.ImageAcudienteUrl,
-                    ImageDeliveryUrl = model.ImageDeliveryUrl,
-                    ImageStudentUrl = model.ImageStudentUrl,
+                    Imagedocl=frente,
+                    Imagedoc2=reverso,
+                    ImageDeliveryUrl = delivery,
                     SiteDelivery = model.SiteDelivery,
                     TelMovil = model.TelMovil,
 
@@ -296,7 +310,7 @@ namespace Pae.web.Controllers
                 var examen = await _converterHelper.ToDetailDataActaAsync(modelfull, true);
                 _context.DetailsDeliveries.Add(examen);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.StudentId}");
+                return RedirectToAction($"DetailsActa/{model.ActaId}");
             }
           
             return View(model);

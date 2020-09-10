@@ -28,36 +28,27 @@ namespace Pae.web.Data.Entities
         public long  TelMovil { get; set; }
 
        
-        [Required (ErrorMessage ="El campo {0} es Requerido")]
-        [Display(Name = "Image Acudiente")]
-        public string ImageAcudienteUrl { get; set; }
-        public string ImageAcudienteFullPath => string.IsNullOrEmpty(ImageAcudienteUrl)
+       
+        [Display(Name = "Doc Side 1")]
+        public string Imagedocl { get; set; }
+        public string ImageDoc1FullPath => string.IsNullOrEmpty(Imagedocl)
                 ? null :
-                $"https://intranetweblcs.azurewebsites.net{ImageAcudienteUrl.Substring(1)}";
+                $"https://intranetweblcs.azurewebsites.net{Imagedocl.Substring(1)}";
 
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
+      
+        [Display(Name = "Doc Side 2")]
+        public string Imagedoc2 { get; set; }
+        public string ImageDoc2FullPath => string.IsNullOrEmpty(Imagedoc2)
+                ? null :
+                $"https://intranetweblcs.azurewebsites.net{Imagedoc2.Substring(1)}";
+
         [Display(Name = "Image Entrega")]
         public string ImageDeliveryUrl { get; set; }
         public string ImageDeliveryFullPath => string.IsNullOrEmpty(ImageDeliveryUrl)
                 ? null :
                 $"https://intranetweblcs.azurewebsites.net{ImageDeliveryUrl.Substring(1)}";
 
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
-        [Display(Name = "Image Acta")]
-        public string ImageActaUrl { get; set; }
-        public string ImageActaFullPath => string.IsNullOrEmpty(ImageActaUrl)
-                ? null :
-                $"https://intranetweblcs.azurewebsites.net{ImageActaUrl.Substring(1)}";
-
-
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
-        [Display(Name = "Image Estudiante")]
-        public string ImageStudentUrl { get; set; }
-        public string ImageStudentFullPath => string.IsNullOrEmpty(ImageStudentUrl)
-                ? null :
-                $"https://intranetweblcs.azurewebsites.net{ImageStudentUrl.Substring(1)}";
-
-        public DeliveryActa DeliveryActa { get; set; }
+       public DeliveryActa DeliveryActa { get; set; }
 
     }
 }

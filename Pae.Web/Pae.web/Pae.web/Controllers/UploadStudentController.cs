@@ -7,12 +7,21 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pae.web.Data;
+using Pae.web.Data.Entities;
 using Pae.web.Models;
 
 namespace Pae.web.Controllers
 {
     public class UploadStudentController : Controller
+
     {
+        private readonly DataContext _dataContext;
+
+        public UploadStudentController(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
         [HttpGet]
         public IActionResult Index(List<UploadStudentViewModel> students=null)
         {
@@ -34,7 +43,7 @@ namespace Pae.web.Controllers
         }
 
 
-        private List<UploadStudentViewModel> GetStudentList(string fName)
+        private  List<UploadStudentViewModel> GetStudentList(string fName)
         {
             try
             {
@@ -47,11 +56,11 @@ namespace Pae.web.Controllers
                     {
                         while (reader.Read())
                         {
-                            students.Add(new UploadStudentViewModel()
+                            students.Add(new Estudents()
                             {
                                 FullName = reader.GetValue(0).ToString(),
                                 Document = Convert.ToInt64(reader.GetValue(1).ToString()),
-                                Site = Convert.ToInt32(reader.GetValue(2).ToString())
+                                Site =  _dataContext.Sites.FirstOrDefault(s => s.Id ==  Convert.ToInt32(reader.GetValue(2).ToString()))
                             });
                         }
                     }

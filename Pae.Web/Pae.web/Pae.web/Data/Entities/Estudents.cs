@@ -10,7 +10,7 @@ namespace Pae.web.Data.Entities
 
         [Required(ErrorMessage ="El campo {} es requerido")]
         [Display(Name ="Documento")]
-        public int Document { get; set; }
+        public long Document { get; set; }
 
         [Required(ErrorMessage = "El campo {} es requerido")]
         [Display(Name = "Nombre Completo")]

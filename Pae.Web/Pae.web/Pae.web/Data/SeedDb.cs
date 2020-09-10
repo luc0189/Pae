@@ -25,7 +25,7 @@ namespace Pae.web.Data
             await CheckRoles();
             await ChekIntitucionAsyn();
             await ChekSiteAsyn();
-            await ChekStudentAsyn();
+            //await ChekStudentAsyn();
          
   
             var manager = await CheckUserAsync(1117498993, "Luis Carlos", "Sanchez Cabrera", "luc0189@gmail.com",
@@ -157,7 +157,7 @@ namespace Pae.web.Data
                     Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
 
 
-                }) ;
+                });
                 _dataContext.Estudents.Add(new Estudents
                 {
 
@@ -173,9 +173,6 @@ namespace Pae.web.Data
             }
         }
 
-      
-       
-      
 
         private async Task CheckManagerAsync(Users user)
         {

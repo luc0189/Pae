@@ -79,7 +79,7 @@ namespace Pae.web.Controllers
                                 FullName = reader.GetValue(1).ToString(),
                                 NOrden = Convert.ToInt32(reader.GetValue(0).ToString()),
                                 Document = reader.GetValue(2).ToString(),
-                                Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == reader.GetValue(3).ToString()),
+                                Sedes = await _dataContext.Sedes.FirstAsync(o => o.NameSedes == reader.GetValue(3).ToString()),
                                  Mesa=reader.GetValue(4).ToString() 
                             //Site =  _dataContext.Sites.FirstAsync(s => s.Id ==  (Convert.ToInt32(reader.GetValue(2).ToString())))
                         });

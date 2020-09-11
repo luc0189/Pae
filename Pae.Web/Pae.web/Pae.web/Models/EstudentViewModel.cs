@@ -24,7 +24,7 @@ namespace Pae.web.Models
         public string Mesa { get; set; }
 
         [Required(ErrorMessage = "El campo {} es requerido")]
-        public Site Site { get; set; }
+        public Sedes Sedes { get; set; }
 
     }
 }

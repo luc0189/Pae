@@ -21,7 +21,7 @@ namespace Pae.web.Data
         public DbSet<Estudents> Estudents { get; set; }
         public DbSet<Institucion> Institucions { get; set; }
         public DbSet<Manager> Managers { get; set; }
-        public DbSet<Site> Sites { get; set; }
+        public DbSet<Sedes> Sedes { get; set; }
        
     }
 }

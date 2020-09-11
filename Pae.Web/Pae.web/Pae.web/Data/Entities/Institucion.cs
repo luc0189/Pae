@@ -9,6 +9,6 @@ namespace Pae.web.Data.Entities
     {
         public int Id { get; set; }
         public string NameIntitucion { get; set; }
-        public ICollection<Site> Sites { get; set; }
+        public ICollection<Sedes> Sedes { get; set; }
     }
 }

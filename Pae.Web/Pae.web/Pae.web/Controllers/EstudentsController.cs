@@ -34,7 +34,7 @@ namespace Pae.web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Estudents
-                .Include(s=> s.Site)
+                .Include(s=> s.Sedes)
                 .ThenInclude(i=>i.Institucion)
                 .ToListAsync());
         }
@@ -48,7 +48,7 @@ namespace Pae.web.Controllers
             }
 
             var estudents = await _context.Estudents
-                .Include(a => a.Site)
+                .Include(a => a.Sedes)
                 .Include(a => a.DeliveryActas)
                 .ThenInclude(d => d.DetailsDeliveries)
                 .Include(a => a.DeliveryActas)

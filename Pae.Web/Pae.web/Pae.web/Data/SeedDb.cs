@@ -128,12 +128,12 @@ namespace Pae.web.Data
         }
         private async Task ChekSiteAsyn()
         {
-            if (!_dataContext.Sites.Any())
+            if (!_dataContext.Sedes.Any())
             {
-                _dataContext.Sites.Add(new Site
+                _dataContext.Sedes.Add(new Sedes
                 {
 
-                    NameSite = "SEDE BELLAVISTA",
+                    NameSedes = "SEDE BELLAVISTA",
                     Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE AGROINDUSTRIAL DE LA AMAZONIA")
 
 

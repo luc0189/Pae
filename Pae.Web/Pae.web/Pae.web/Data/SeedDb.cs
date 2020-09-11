@@ -143,35 +143,35 @@ namespace Pae.web.Data
                 await _dataContext.SaveChangesAsync();
             }
         }
-        private async Task ChekStudentAsyn()
-        {
-            if (!_dataContext.Estudents.Any())
-            {
+        //private async Task ChekStudentAsyn()
+        //{
+        //    if (!_dataContext.Estudents.Any())
+        //    {
 
-                _dataContext.Estudents.Add(new Estudents
-                {
+        //        _dataContext.Estudents.Add(new Estudents
+        //        {
 
-                    Document = 1117523911,
-                    FullName = "SNEIDER  VEGA PALOMARES",
-                    //Mesa = "Mesa 1",
-                    Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
-
-
-                });
-                _dataContext.Estudents.Add(new Estudents
-                {
-
-                    Document = 1117935724,
-                    FullName = "DIYER ESNEIDER LOPEZ VARGAS",
-                    //Mesa = "Mesa 2",
-                    Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
+        //            Document = 1117523911,
+        //            FullName = "SNEIDER  VEGA PALOMARES",
+        //            //Mesa = "Mesa 1",
+        //            Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
 
 
-                });
+        //        });
+        //        _dataContext.Estudents.Add(new Estudents
+        //        {
 
-                await _dataContext.SaveChangesAsync();
-            }
-        }
+        //            Document = 1117935724,
+        //            FullName = "DIYER ESNEIDER LOPEZ VARGAS",
+        //            //Mesa = "Mesa 2",
+        //            Site = await _dataContext.Sites.FirstAsync(o => o.NameSite == "SEDE BELLAVISTA")
+
+
+        //        });
+
+        //        await _dataContext.SaveChangesAsync();
+        //    }
+        //}
 
 
         private async Task CheckManagerAsync(Users user)

@@ -67,13 +67,16 @@
                                             <thead>
                                                 <tr>
                                                     <th>
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Id)
+                                                    </th>
+                                                    <th>
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().FechaCrea)
                                                     </th>
                                                     <th>
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Periodos.MonthDelivery)
                                                     </th>
                                                     <th>
-                                                       (#1) Entregado 
+                                                        (#1) Entregado
                                                     </th>
                                                     <th>
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Usucrea)
@@ -86,27 +89,30 @@
                                             <tbody>
                                                 @foreach (var item in Model.DeliveryActas)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.FechaCrea)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Periodos.MonthDelivery)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
-                                                        </td>
-                                                      
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Usucrea)
-                                                        </td>
-                                                        <td>
-                                                            <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                            <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Id)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FechaCrea)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Periodos.MonthDelivery)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
+                                                    </td>
 
-                                                            <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Usucrea)
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                        <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+
+
+                                                    </td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>

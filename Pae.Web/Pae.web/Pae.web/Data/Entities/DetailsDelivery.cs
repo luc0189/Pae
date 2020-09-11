@@ -42,11 +42,7 @@ namespace Pae.web.Data.Entities
                 ? null :
                 $"https://intranetweblcs.azurewebsites.net{Imagedoc2.Substring(1)}";
 
-        [Display(Name = "Image Entrega")]
-        public string ImageDeliveryUrl { get; set; }
-        public string ImageDeliveryFullPath => string.IsNullOrEmpty(ImageDeliveryUrl)
-                ? null :
-                $"https://intranetweblcs.azurewebsites.net{ImageDeliveryUrl.Substring(1)}";
+       
 
        public DeliveryActa DeliveryActa { get; set; }
 

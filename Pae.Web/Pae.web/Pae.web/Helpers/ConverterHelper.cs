@@ -33,7 +33,7 @@ namespace Pae.web.Helpers
                 SiteDelivery=model.SiteDelivery,
                 Imagedocl=model.Imagedocl,
                 Imagedoc2=model.Imagedoc2,
-                ImageDeliveryUrl=model.ImageDeliveryUrl
+               
 
 
             };
@@ -63,10 +63,7 @@ namespace Pae.web.Helpers
                 Id = isNew ? 0 : model.Id,
                 DocAcudiente=model.DocAcudiente,
                 FullNameAcudiente=model.FullNameAcudiente,
-                
-                
-                ImageDeliveryUrl=model.ImageDeliveryUrl,
-               
+                               
                 SiteDelivery=model.SiteDelivery,
                 TelMovil=model.TelMovil
             };

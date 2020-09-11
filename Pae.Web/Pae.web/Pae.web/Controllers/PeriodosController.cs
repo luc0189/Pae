@@ -123,15 +123,19 @@ namespace Pae.web.Controllers
             {
                 return NotFound();
             }
-
-            var periodos = await _context.Periodos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (periodos == null)
+            try
             {
-                return NotFound();
+                var periodos = await _context.Periodos
+                .FirstOrDefaultAsync(m => m.Id == id);
+                return View(periodos);
             }
-
-            return View(periodos);
+            catch (Exception e)
+            {
+               
+                ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
+                return View();
+            }
+            
         }
 
         // POST: Periodos/Delete/5
@@ -139,10 +143,20 @@ namespace Pae.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var periodos = await _context.Periodos.FindAsync(id);
-            _context.Periodos.Remove(periodos);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var periodos = await _context.Periodos.FindAsync(id);
+                _context.Periodos.Remove(periodos);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.Success = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
+                return View();
+            }
+           
         }
 
         private bool PeriodosExists(int id)

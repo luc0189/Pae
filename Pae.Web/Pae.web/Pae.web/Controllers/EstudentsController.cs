@@ -33,7 +33,10 @@ namespace Pae.web.Controllers
         // GET: Estudents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Estudents.ToListAsync());
+            return View(await _context.Estudents
+                .Include(s=> s.Site)
+                .ThenInclude(i=>i.Institucion)
+                .ToListAsync());
         }
 
         // GET: Estudents/Details/5 DetailsActa
@@ -301,7 +304,7 @@ namespace Pae.web.Controllers
                     ActaId=model.ActaId,
                     Imagedocl=frente,
                     Imagedoc2=reverso,
-                    ImageDeliveryUrl = delivery,
+                    
                     SiteDelivery = model.SiteDelivery,
                     TelMovil = model.TelMovil,
 

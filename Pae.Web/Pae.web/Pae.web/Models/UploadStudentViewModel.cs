@@ -6,6 +6,10 @@ namespace Pae.web.Models
     public class UploadStudentViewModel
     {
         [Required(ErrorMessage = "El campo {} es requerido")]
+        [Display(Name = "Codigo")]
+        public int NOrden { get; set; }
+
+        [Required(ErrorMessage = "El campo {} es requerido")]
         [Display(Name = "Documento")]
         public long Document { get; set; }
 

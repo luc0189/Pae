@@ -93,9 +93,7 @@
                                                     <th>
                                                         Img2
                                                     </th>
-                                                    <th>
-                                                        Img Delivery
-                                                    </th>
+                                                   
                                                     <th>
                                                         Acciones
                                                     </th>
@@ -135,14 +133,7 @@
 
                                                         }
                                                     </td>
-                                                    <td>
-                                                        @if (!string.IsNullOrEmpty(item.ImageDeliveryUrl))
-                                                        {
-
-                                                            <img src="@Url.Content(item.ImageDeliveryUrl)" alt="Image" style="width:100px;height:100px;" />
-
-                                                        }
-                                                    </td>
+                                                    
                                                     <td>
                                                         <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
                                                         <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>

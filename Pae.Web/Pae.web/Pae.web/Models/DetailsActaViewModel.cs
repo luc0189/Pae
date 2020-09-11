@@ -23,8 +23,7 @@ namespace Pae.web.Models
         [Display(Name = "Doc Side 2")]
         public IFormFile ImageDocReverso { get; set; }
 
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
-        [Display(Name = "Image Delivery")]
+        
         public IFormFile ImageDelivery { get; set; }
 
 

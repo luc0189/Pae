@@ -1,0 +1,35 @@
+﻿@model Pae.web.Models.AddSedeViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<hr />
+<form asp-action="EditSede">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Editar</h2>
+
+                    <h4>Sede</h4>
+                </div>
+                <div class="panel-body">
+                    <partial name="_Sedes"></partial>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

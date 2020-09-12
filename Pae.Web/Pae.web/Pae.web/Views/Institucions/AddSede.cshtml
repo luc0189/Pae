@@ -1,6 +1,6 @@
 ﻿@model Pae.web.Models.AddSedeViewModel
 
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 
     <hr />
 
@@ -15,16 +15,12 @@
                         <h4>Sede</h4>
                     </div>
                     <div class="panel-body">
-                        <input type="hidden" asp-for="InstitucionId" />
-                        <div class="form-group">
-                            <label asp-for="NameSedes" class="control-label"></label>
-                            <input asp-for="NameSedes" class="form-control" />
-                            <span asp-validation-for="NameSedes" class="text-danger"></span>
-                        </div>
+                        <partial name="_Sedes" />
                     </div>
                     <div class="panel-footer">
                         <div class="form-group">
                             <input type="submit" value="Create" class="btn btn-primary" />
+                            <a asp-action="Details" class="btn btn-success" asp-route-id="@Model.InstitucionId"><i class="glyphicon glyphicon-circle-arrow-left"></i> Back To Institucion</a>
                         </div>
                     </div>
                 </div>

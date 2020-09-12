@@ -39,28 +39,28 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NOrden)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Document)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FullName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Sedes.NameSedes)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Mesa)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
-                                    
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NOrden)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Document)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sedes.NameSedes)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mesa)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -73,6 +73,10 @@
     </div>
 </div>
 
+
+
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -83,6 +87,6 @@
             var action_to_delete;
             $('.display').DataTable();
 
-             });
+        });
     </script>
 }

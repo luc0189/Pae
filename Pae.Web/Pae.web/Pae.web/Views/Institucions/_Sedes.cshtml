@@ -1,0 +1,8 @@
+﻿@model Pae.web.Models.AddSedeViewModel
+
+<input type="hidden" asp-for="InstitucionId" />
+<div class="form-group">
+    <label asp-for="NameSedes" class="control-label"></label>
+    <input asp-for="NameSedes" class="form-control" />
+    <span asp-validation-for="NameSedes" class="text-danger"></span>
+</div>

@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -19,7 +20,7 @@
                                 @Html.DisplayNameFor(model => model.NameIntitucion)
                             </dt>
                             <dd>
-                                @Html.DisplayFor(model => model.NameIntitucion)
+                                <h2>@Html.DisplayFor(model => model.NameIntitucion)</h2>
                             </dd>
                         </dl>
                     </div>
@@ -28,19 +29,110 @@
 
             </div>
             <div class="panel-body">
+                @if (Model.Sedes.Count == 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a asp-action="AddSede" class="btn btn-primary" asp-route-id="@Model.Id">Adicionar Sede</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+
+
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+
+                                    <a asp-action="AddSede" class="btn btn-primary" asp-route-id="@Model.Id">Adicionar Sede</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-responsive table-striped display">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Sedes.FirstOrDefault().Id)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Sedes.FirstOrDefault().NameSedes)
+                                                    </th>
+
+                                                    <th>
+                                                        Acciones
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Sedes)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Id)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.NameSedes)
+                                                        </td>
+
+                                                        <td>
+                                                            <a asp-action="EditSede" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                          
+                                                            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             <div class="panel-footer">
                 <div>
-                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id">Edit</a> 
-                    <a asp-action="AddSede" class="btn btn-primary" asp-route-id="@Model.Id">Adicionar Sede</a> 
-                    <a asp-action="Index"  class="btn btn-success">Back to List</a>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id">Edit</a>
+
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
                 </div>
 
             </div>
         </div>
     </div>
 </div>
+<partial name="_DeleteDialogModal" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+            var action_to_delete;
+            $('.display').DataTable();
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Institucions/DeleteSede/' + item_to_delete;
+            });
+        });
+    </script>
+}
 
 
 

@@ -78,5 +78,16 @@ namespace Pae.web.Helpers
                 NameSedes=modelfull.NameSedes
             };
         }
+
+        public AddSedeViewModel ToSedeViewModel(Sedes sede )
+        {
+            return new AddSedeViewModel
+            {
+               Id=sede.Id,
+               InstitucionId =sede.Institucion.Id,
+                Institucion = sede.Institucion,
+                NameSedes = sede.NameSedes
+            };
+        }
     }
 }

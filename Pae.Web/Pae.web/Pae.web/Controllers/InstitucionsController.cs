@@ -40,6 +40,7 @@ namespace Pae.web.Controllers
             }
 
             var institucion = await _context.Institucions
+                .Include(a => a.Sedes)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (institucion == null)
             {
@@ -135,20 +136,32 @@ namespace Pae.web.Controllers
             if (institucion == null)
             {
                 return NotFound();
+               
             }
 
-            return View(institucion);
-        }
-
-        // POST: Institucions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var institucion = await _context.Institucions.FindAsync(id);
             _context.Institucions.Remove(institucion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeleteSede(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sons = await _context.Sedes
+                .Include(pi => pi.Institucion)
+                .FirstOrDefaultAsync(pi => pi.Id == id.Value);
+            if (sons == null)
+            {
+                return NotFound();
+            }
+
+            _context.Sedes.Remove(sons);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"{nameof(Details)}/{sons.Institucion.Id}");
         }
 
         private bool InstitucionExists(int id)
@@ -193,5 +206,37 @@ namespace Pae.web.Controllers
            
             return View(model);
         }
+        public async Task<IActionResult> EditSede(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var exams = await _context.Sedes
+                .Include(s => s.Institucion)
+               
+                .FirstOrDefaultAsync(s => s.Id == id);
+            if (exams == null)
+            {
+                return NotFound();
+            }
+
+            return View(_converterHelper.ToSedeViewModel(exams));
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditSede(AddSedeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var contract = await _converterHelper.ToSedeAsync(model, false);
+                _context.Sedes.Update(contract);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Details)}/{model.InstitucionId}");
+            }
+            return View(model);
+
+           
+        }
+
     }
 }

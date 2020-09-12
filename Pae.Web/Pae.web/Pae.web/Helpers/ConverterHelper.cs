@@ -69,5 +69,14 @@ namespace Pae.web.Helpers
             };
         }
 
+        public async Task<Sedes> ToSedeAsync(AddSedeViewModel modelfull, bool isNew)
+        {
+            return new Sedes
+            {
+                Id = isNew ? 0 : modelfull.Id,
+                Institucion = await _dataContext.Institucions.FindAsync(modelfull.InstitucionId),
+                NameSedes=modelfull.NameSedes
+            };
+        }
     }
 }

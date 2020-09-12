@@ -7,7 +7,7 @@ namespace Pae.web.Data.Entities
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El campo {} es requerido")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(100)]
         public string NameSedes { get; set; }
 

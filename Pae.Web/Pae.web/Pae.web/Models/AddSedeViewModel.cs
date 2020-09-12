@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Pae.web.Models
 {
-    public class AddSiteViewModel
+    public class AddSedeViewModel : Sedes
     {
-        public int Id { get; set; }
+       
         public int InstitucionId { get; set; }
 
-        [Required(ErrorMessage = "El campo {} es requerido")]
-        [MaxLength(100)]
-        public string NameSites { get; set; }
+       
     }
 }

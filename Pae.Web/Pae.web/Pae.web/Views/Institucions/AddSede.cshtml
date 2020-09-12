@@ -1,0 +1,35 @@
+﻿@model Pae.web.Models.AddSedeViewModel
+
+
+
+    <hr />
+
+    <form asp-action="AddSede" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Adicionar</h2>
+                        <h4>Sede</h4>
+                    </div>
+                    <div class="panel-body">
+                        <input type="hidden" asp-for="InstitucionId" />
+                        <div class="form-group">
+                            <label asp-for="NameSedes" class="control-label"></label>
+                            <input asp-for="NameSedes" class="form-control" />
+                            <span asp-validation-for="NameSedes" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </form>

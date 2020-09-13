@@ -1,0 +1,40 @@
+﻿@model Pae.web.Models.DeliveryActaViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<hr />
+<form asp-action="EditDelivery">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Edit</h2>
+                    <h4>Period Delivery</h4>
+                </div>
+                <div class="panel-body">
+                    <input type="hidden" asp-for="EstudentId" />
+                   
+
+
+                    <div class="form-group">
+                        <label asp-for="PeriodoId" class="control-label"></label>
+                        <select asp-for="PeriodoId" asp-items="Model.Periodos" class="form-control">
+                        </select>
+                        <span asp-validation-for="PeriodoId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Details" asp-route-id="@Model.EstudentId" class="btn btn-success">Back to Employed</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>

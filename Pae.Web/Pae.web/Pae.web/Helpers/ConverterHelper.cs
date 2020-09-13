@@ -78,6 +78,16 @@ namespace Pae.web.Helpers
                 NameSedes=modelfull.NameSedes
             };
         }
+        //public async Task<DeliveryActa> ToDeliveryActaAsync(DeliveryActaViewModel modelfull, bool isNew)
+        //{
+        //    return new DeliveryActa
+        //    {
+        //        Id = isNew ? 0 : modelfull.Id,
+        //        Estudents = await _dataContext.Estudents.FindAsync(modelfull.EstudentId),
+               
+        //        Usucrea=modelfull.Usucrea
+        //    };
+        //}
 
         public AddSedeViewModel ToSedeViewModel(Sedes sede )
         {
@@ -87,6 +97,33 @@ namespace Pae.web.Helpers
                InstitucionId =sede.Institucion.Id,
                 Institucion = sede.Institucion,
                 NameSedes = sede.NameSedes
+            };
+        }
+
+    
+        
+
+       public DeliveryActaViewModel ToDeliveryActaViewModel(DeliveryActa deliveryActa)
+        {
+            return new DeliveryActaViewModel
+            {
+                Id=deliveryActa.Id,
+                PeriodoId=deliveryActa.Periodos.Id,
+                Usucrea=deliveryActa.Usucrea,
+                Periodos= _combosHelpers.GetComboPeriodoTypes(),
+                EstudentId=deliveryActa.Estudents.Id
+            };
+        }
+
+        public async Task<DeliveryActa> ToDeliveryActaAsync(DeliveryActaViewModel model, bool isNew)
+        {
+            return new DeliveryActa
+            {
+
+                Id = isNew ? 0 : model.Id,
+                Periodos = await _dataContext.Periodos.FindAsync(model.PeriodoId),
+                Usucrea = model.Usucrea,
+                Estudents = await _dataContext.Estudents.FindAsync(model.EstudentId)
             };
         }
     }

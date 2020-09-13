@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -17,6 +17,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.NameIntitucion)
                                 </th>
                                 <th>Acciones</th>
@@ -25,16 +28,19 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NameIntitucion)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a> 
-                                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a> 
-                                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NameIntitucion)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -46,6 +52,12 @@
         </div>
     </div>
 </div>
+<partial name="_DeleteDialogModal"/>
+<div class="text-success">
+    <p>
+        @ViewBag.Success
+    </p>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -56,7 +68,15 @@
             var item_to_delete;
             var action_to_delete;
             $('.display').DataTable();
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
 
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Institucions/Delete/' + item_to_delete;
+            });
         });
     </script>
 }

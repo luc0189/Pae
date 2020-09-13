@@ -1,4 +1,4 @@
-﻿@model Pae.web.Data.Entities.Estudents
+﻿@model Pae.web.Models.EstudentViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,16 +13,8 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Document" class="control-label"></label>
-                <input asp-for="Document" class="form-control" />
-                <span asp-validation-for="Document" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Id" />
+           <partial name="_Student"/>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

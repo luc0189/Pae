@@ -53,6 +53,8 @@ namespace Pae.web.Controllers
         // GET: Institucions/Create
         public IActionResult Create()
         {
+
+          
             return View();
         }
 
@@ -123,7 +125,7 @@ namespace Pae.web.Controllers
             return View(institucion);
         }
 
-        // GET: Institucions/Delete/5
+       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,10 +140,19 @@ namespace Pae.web.Controllers
                 return NotFound();
                
             }
+            try
+            {
 
-            _context.Institucions.Remove(institucion);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                _context.Institucions.Remove(institucion);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.Message = $"Excepcion no Controlada: {e.Message} Detalle: {e.InnerException}";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         public async Task<IActionResult> DeleteSede(int? id)
@@ -158,10 +169,19 @@ namespace Pae.web.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Sedes.Remove(sons);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Details)}/{sons.Institucion.Id}");
+            }
+            catch (Exception e)
+            {
 
-            _context.Sedes.Remove(sons);
-            await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(Details)}/{sons.Institucion.Id}");
+                ViewBag.Message = $"Excepcion no Controlada: {e.Message} Detalle: {e.InnerException}";
+                return View();
+            }
+           
         }
 
         private bool InstitucionExists(int id)

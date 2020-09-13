@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <hr />
 
 <div class="row">
@@ -20,13 +21,13 @@
                                 <Strong>
                                     @Html.DisplayNameFor(model => model.Document)
                                 </Strong>
-                                
+
                             </dt>
                             <dd>
                                 <h2>
                                     @Html.DisplayFor(model => model.Document)
                                 </h2>
-                               
+
                             </dd>
                             <dt>
                                 @Html.DisplayNameFor(model => model.FullName)
@@ -89,30 +90,30 @@
                                             <tbody>
                                                 @foreach (var item in Model.DeliveryActas)
                                                 {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Id)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.FechaCrea)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Periodos.MonthDelivery)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
-                                                    </td>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Id)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.FechaCrea)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Periodos.MonthDelivery)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
+                                                        </td>
 
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Usucrea)
-                                                    </td>
-                                                    <td>
-                                                        <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                        <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Usucrea)
+                                                        </td>
+                                                        <td>
+                                                            <a asp-action="EditDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                            <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
 
-
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -137,6 +138,31 @@
         </div>
     </div>
 </div>
+
+<partial name="_DeleteDialogModal" />
+<partial name="_Exepction"/>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+            var action_to_delete;
+            $('.display').DataTable();
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Institucions/Delete/' + item_to_delete;
+            });
+        });
+    </script>
+}
 
 
 

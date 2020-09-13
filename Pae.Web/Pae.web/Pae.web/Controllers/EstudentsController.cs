@@ -65,23 +65,48 @@ namespace Pae.web.Controllers
         // GET: Estudents/Create
         public IActionResult Create()
         {
-         
+            var student = new EstudentViewModel
+            {
+                Sedes = _combosHelpers.GetComboSedes(),
+                
+            };
 
-            return View();
+            student.Sedes = _combosHelpers.GetComboSedes();
+
+            return View(student);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Document,FullName")] Estudents estudents)
+        public async Task<IActionResult> Create(EstudentViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(estudents);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var student = new Estudents
+                {
+                    NOrden=model.NOrden,
+                    Document= model.Document,
+                    DeliveryActas = new List<DeliveryActa>(),
+                   FullName=model.FullName,
+                   Mesa=model.Mesa,
+                   Sedes= await _context.Sedes.FindAsync(model.SedeId)
+
+                };
+                try
+                {
+                    _context.Add(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e )
+                {
+                    ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
+                    return View(model);
+                }
+               
             }
-            return View(estudents);
+            return View(model);
         }
 
         // GET: Estudents/Edit/5
@@ -92,47 +117,62 @@ namespace Pae.web.Controllers
                 return NotFound();
             }
 
-            var estudents = await _context.Estudents.FindAsync(id);
+            var estudents = await _context.Estudents
+                .Include(s=>s.Sedes)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (estudents == null)
             {
                 return NotFound();
             }
-            return View(estudents);
+            var model = new EstudentViewModel
+            {
+                Document=estudents.Document,
+                NOrden=estudents.NOrden,
+                FullName=estudents.FullName,
+                Id=estudents.Id,
+                Mesa=estudents.Mesa,
+                SedeId=estudents.Sedes.Id,
+                Sedes= _combosHelpers.GetComboSedes()
+            };
+            return View(model);
         }
 
-        // POST: Estudents/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Document,FullName")] Estudents estudents)
+        public async Task<IActionResult> Edit(EstudentViewModel vista)
         {
-            if (id != estudents.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var student = await _context.Estudents
+                     .Include(s => s.Sedes)
+                     .FirstOrDefaultAsync(o => o.Id == vista.Id);
+                if (student != null)
                 {
-                    _context.Update(estudents);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EstudentsExists(estudents.Id))
+                    student.Document = vista.Document;
+                    student.Sedes = await _context.Sedes.FindAsync(vista.SedeId);
+                    student.FullName = vista.FullName;
+                    student.Id = vista.Id;
+                    student.Mesa = vista.Mesa;
+                    student.NOrden = vista.NOrden;
+
+                    try
                     {
-                        return NotFound();
+                        _context.Estudents.Update(student);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
                     }
-                    else
+                    catch (Exception e)
                     {
-                        throw;
+                        ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
+                        return View(vista);
                     }
+
+                    
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(estudents);
+
+            return View(vista);
         }
 
         // GET: Estudents/Delete/5
@@ -318,6 +358,49 @@ namespace Pae.web.Controllers
           
             return View(model);
             }
+
+
+        public async Task<IActionResult> EditDelivery(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var deliveryActa = await _context.DeliveryActas
+                .Include(s => s.Estudents)
+                .Include(p=>p.Periodos)
+                .FirstOrDefaultAsync(s => s.Id == id);
+            if (deliveryActa == null)
+            {
+                return NotFound();
+            }
+           
+            return View(_converterHelper.ToDeliveryActaViewModel(deliveryActa));
         }
+        [HttpPost]
+        public async Task<IActionResult> EditDelivery(DeliveryActaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                try
+                {
+                    var deliveyActa = await _converterHelper.ToDeliveryActaAsync(model, false);
+                    _context.DeliveryActas.Update(deliveyActa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction($"{nameof(Details)}/{model.EstudentId}");
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+                
+            }
+            return View(model);
+
+
+        }
+    }
     }
 

@@ -33,5 +33,20 @@ namespace Pae.web.Helpers
             });
             return list;
         }
+        public IEnumerable<SelectListItem> GetComboSedes()
+        {
+            var list = _dataContext.Sedes.Select(et => new SelectListItem
+            {
+                Text = et.NameSedes,
+                Value = $"{et.Id}"
+            }).OrderBy(et => et.Text)
+             .ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione una Sede...)",
+                Value = "0"
+            });
+            return list;
+        }
     }
 }

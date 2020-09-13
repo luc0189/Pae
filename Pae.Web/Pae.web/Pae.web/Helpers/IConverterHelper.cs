@@ -11,5 +11,10 @@ namespace Pae.web.Helpers
         DetailsDelivery ToDetailsDeliveryAsync(DetailsActaViewModel model, bool isNew);//
         Task<Sedes> ToSedeAsync(AddSedeViewModel modelfull, bool isNew);
         AddSedeViewModel ToSedeViewModel(Sedes exams);
+        DeliveryActaViewModel ToDeliveryActaViewModel(DeliveryActa deliveryActa);
+        Task<DeliveryActa> ToDeliveryActaAsync(DeliveryActaViewModel model, bool isNew);
+        //DeliveryActa ToDeliveryActaViewModel(DeliveryActaViewModel exams);
+        //Task<DeliveryActa> ToDeliveryActaAsync(DeliveryActaViewModel model, bool isNew);
+
     }
 }

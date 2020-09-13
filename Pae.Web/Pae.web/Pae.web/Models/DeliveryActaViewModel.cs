@@ -19,7 +19,6 @@ namespace Pae.web.Models
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione un Periodo.")]
         public int PeriodoId { get; set; }
 
-
         public IEnumerable<SelectListItem> Periodos { get; set; }
     }
 }

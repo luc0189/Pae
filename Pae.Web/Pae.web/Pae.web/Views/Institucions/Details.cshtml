@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -83,7 +83,7 @@
 
                                                         <td>
                                                             <a asp-action="EditSede" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                          
+
                                                             <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
 
                                                         </td>
@@ -111,6 +111,11 @@
     </div>
 </div>
 <partial name="_DeleteDialogModal" />
+<div class="text-success">
+    <p>
+        @ViewBag.Success
+    </p>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

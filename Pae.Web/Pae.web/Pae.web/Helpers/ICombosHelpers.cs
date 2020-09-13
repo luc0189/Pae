@@ -9,5 +9,6 @@ namespace Pae.web.Helpers
     public interface ICombosHelpers
     {
         IEnumerable<SelectListItem> GetComboPeriodoTypes();
+        IEnumerable<SelectListItem> GetComboSedes();
     }
 }

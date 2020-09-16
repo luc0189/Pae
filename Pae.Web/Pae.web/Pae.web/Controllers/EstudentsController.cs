@@ -29,14 +29,58 @@ namespace Pae.web.Controllers
             _converterHelper = converterHelper;
            _imageHelper = imageHelper;
         }
-
-        // GET: Estudents
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> SearchDoc(int? usr)
         {
-            return View(await _context.Estudents
-                .Include(s=> s.Sedes)
-                .ThenInclude(i=>i.Institucion)
-                .ToListAsync());
+            if (usr == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var estudents = await _context.Estudents
+               .Include(s => s.Sedes)
+               .FirstOrDefaultAsync(m => m.Document == Convert.ToString(usr));
+                if (estudents == null)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction($"Details/{estudents.Id}");
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+        public async Task<IActionResult> SearchName(string name)
+        {
+            if (name == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                var estudents = await _context.Estudents
+               .Include(s => s.Sedes)
+               .FirstOrDefaultAsync(m => m.FullName == Convert.ToString(name));
+                if (estudents == null)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction($"Details/{estudents.Id}");
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        // GET: Estudents
+        public IActionResult Index()
+        {
+            return View();
         }
 
         // GET: Estudents/Details/5 DetailsActa

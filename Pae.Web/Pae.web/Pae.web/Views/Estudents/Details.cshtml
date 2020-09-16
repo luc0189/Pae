@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Details";
 }
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <hr />
+<h2>Details: Estudents</h2>
 
 <div class="row">
     <div class="col-md-12">
@@ -12,8 +13,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Details</h2>
-                        <h4>Estudents</h4>
+
                     </div>
                     <div class="col-md-6">
                         <dl class="dl-horizontal">
@@ -24,9 +24,9 @@
 
                             </dt>
                             <dd>
-                                <h2>
+                              
                                     @Html.DisplayFor(model => model.Document)
-                                </h2>
+                              
 
                             </dd>
                             <dt>
@@ -140,7 +140,7 @@
 </div>
 
 <partial name="_DeleteDialogModal" />
-<partial name="_Exepction"/>
+<partial name="_Exepction" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -158,7 +158,7 @@
 
 
             $("#btnYesDelete").click(function () {
-                window.location.href = '/Institucions/Delete/' + item_to_delete;
+                window.location.href = '/Estudents/Delete/' + item_to_delete;
             });
         });
     </script>

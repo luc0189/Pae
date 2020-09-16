@@ -204,7 +204,7 @@ namespace Pae.web.Controllers
                     {
                         _context.Estudents.Update(student);
                         await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction($"Details/{student.Id}");
                     }
                     catch (Exception e)
                     {
@@ -220,33 +220,39 @@ namespace Pae.web.Controllers
         }
 
         // GET: Estudents/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteActa(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var estudents = await _context.Estudents
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (estudents == null)
+            try
             {
+                var deliveryActa = await _context.DeliveryActas
+                    .Include(e=>e.Estudents)    
+                    .FirstOrDefaultAsync(d=>d.Id==id);
+                if (deliveryActa == null)
+                {
+                    return NotFound();
+                }
+                _context.DeliveryActas.Remove(deliveryActa);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{deliveryActa.Estudents.Id}");
+
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
                 return NotFound();
+
+
             }
 
-            return View(estudents);
+          
         }
 
-        // POST: Estudents/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var estudents = await _context.Estudents.FindAsync(id);
-            _context.Estudents.Remove(estudents);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+       
 
         private bool EstudentsExists(int id)
         {

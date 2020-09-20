@@ -27,10 +27,9 @@ namespace Pae.web.Helpers
             {
                 Id = isNew ? 0 : model.Id,
                 DeliveryActa= await _dataContext.DeliveryActas.FindAsync(model.ActaId),
-                DocAcudiente=model.DocAcudiente,
-               FullNameAcudiente=model.FullNameAcudiente,
+               
                 TelMovil=model.TelMovil,
-                SiteDelivery=model.SiteDelivery,
+             
                 Imagedocl=model.Imagedocl,
                 Imagedoc2=model.Imagedoc2,
                
@@ -47,9 +46,12 @@ namespace Pae.web.Helpers
                 Id = isNew ? 0 : model.Id,
                 FechaCrea=DateTime.Now,
                 Usucrea=model.Usucrea,
-                Estudents = await _dataContext.Estudents.FindAsync(model.EstudentId),
-                Periodos = await _dataContext.Periodos.FindAsync(model.PeriodoId)
-
+                Estudents = await _dataContext.Estudents.FindAsync(model.StudentID),
+               Entrega3=model.Entrega3,
+               Entrega4=model.Entrega4,
+               Entrega5=model.Entrega5,
+               Entrega6=model.Entrega6,
+               Entrega7=model.Entrega7
 
 
             };
@@ -61,10 +63,7 @@ namespace Pae.web.Helpers
             return new DetailsDelivery
             {
                 Id = isNew ? 0 : model.Id,
-                DocAcudiente=model.DocAcudiente,
-                FullNameAcudiente=model.FullNameAcudiente,
-                               
-                SiteDelivery=model.SiteDelivery,
+              
                 TelMovil=model.TelMovil
             };
         }
@@ -108,10 +107,15 @@ namespace Pae.web.Helpers
             return new DeliveryActaViewModel
             {
                 Id=deliveryActa.Id,
-                PeriodoId=deliveryActa.Periodos.Id,
+            
                 Usucrea=deliveryActa.Usucrea,
-                Periodos= _combosHelpers.GetComboPeriodoTypes(),
-                EstudentId=deliveryActa.Estudents.Id
+            
+                StudentID=deliveryActa.Estudents.Id,
+                Entrega3=deliveryActa.Entrega3,
+                Entrega4=deliveryActa.Entrega4,
+                Entrega5=deliveryActa.Entrega5,
+                Entrega6=deliveryActa.Entrega6,
+                Entrega7=deliveryActa.Entrega7
             };
         }
 
@@ -121,9 +125,13 @@ namespace Pae.web.Helpers
             {
 
                 Id = isNew ? 0 : model.Id,
-                Periodos = await _dataContext.Periodos.FindAsync(model.PeriodoId),
+                Entrega3=model.Entrega3,
+                Entrega4=model.Entrega4,
+                Entrega5=model.Entrega5,
+                Entrega6=model.Entrega6,
+                Entrega7=model.Entrega7,
                 Usucrea = model.Usucrea,
-                Estudents = await _dataContext.Estudents.FindAsync(model.EstudentId)
+                Estudents = await _dataContext.Estudents.FindAsync(model.StudentID)
             };
         }
     }

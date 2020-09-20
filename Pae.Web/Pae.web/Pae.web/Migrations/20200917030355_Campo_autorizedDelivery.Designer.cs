@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pae.web.Data;
 
 namespace Pae.web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200917030355_Campo_autorizedDelivery")]
+    partial class Campo_autorizedDelivery
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,9 +162,19 @@ namespace Pae.web.Migrations
 
                     b.Property<int?>("DeliveryActaId");
 
+                    b.Property<int>("DocAcudiente");
+
+                    b.Property<string>("FullNameAcudiente")
+                        .IsRequired()
+                        .HasMaxLength(120);
+
                     b.Property<string>("Imagedoc2");
 
                     b.Property<string>("Imagedocl");
+
+                    b.Property<string>("SiteDelivery")
+                        .IsRequired()
+                        .HasMaxLength(120);
 
                     b.Property<long>("TelMovil");
 
@@ -191,7 +203,7 @@ namespace Pae.web.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("Mesas")
+                    b.Property<string>("Mesa")
                         .IsRequired()
                         .HasMaxLength(20);
 

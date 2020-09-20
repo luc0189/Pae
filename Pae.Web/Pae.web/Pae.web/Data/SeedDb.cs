@@ -66,31 +66,38 @@ namespace Pae.web.Data
                 {
 
                     NameIntitucion = "IE BELLO HORIZONTE"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE CIUDADELA SIGLO XXI "
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE DIVINO NIÑO"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE JORGE ELIECER GAITAN"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE JUAN BAUTISTA LA SALLE"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE JUAN BAUTISTA MIGANI"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE LA ESPERANZA"
-                }); _dataContext.Institucions.Add(new Institucion
+                });
+                _dataContext.Institucions.Add(new Institucion
                 {
 
                     NameIntitucion = "IE LA SALLE"
@@ -118,10 +125,6 @@ namespace Pae.web.Data
                 {
 
                     NameIntitucion = "IE TECNICO INDUSTRIAL"
-                }); _dataContext.Institucions.Add(new Institucion
-                {
-
-                    NameIntitucion = "IE LOS PINOS"
                 });
                 await _dataContext.SaveChangesAsync();
             }
@@ -135,6 +138,345 @@ namespace Pae.web.Data
 
                     NameSedes = "SEDE BELLAVISTA",
                     Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE AGROINDUSTRIAL DE LA AMAZONIA")
+
+
+                }); 
+              
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE AGROECOLOGICO AMAZONICO BUINAIMA SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE AGROECOLOGICO AMAZONICO BUINAIMA")
+
+
+                });
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE ANTONIO RICAURTE",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE ANTONIO RICAURTE")
+
+
+                });
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE JUAN XXIII",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE ANTONIO RICAURTE")
+
+
+                }); _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE MONSERRATE",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BARRIOS UNIDOS DEL SUR")
+
+
+                });
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE BARRIOS UNIDOS DEL SUR SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BARRIOS UNIDOS DEL SUR")
+
+
+                });
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE PUEBLO NUEVO",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BARRIOS UNIDOS DEL SUR")
+
+
+                });
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE SANTA INES",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BARRIOS UNIDOS DEL SUR")
+
+
+                });
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LA FLORIDA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BELLO HORIZONTE")
+
+
+                });
+                  _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE BELLO HORIZONTE SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE BELLO HORIZONTE")
+
+
+                });
+                  _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE EL TRIUNFO",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE CIUDADELA SIGLO XXI")
+
+
+                });
+                   _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE PABLO NERUDA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE CIUDADELA SIGLO XXI")
+
+
+                });
+                   _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE CIUDADELA SIGLO XXI SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE CIUDADELA SIGLO XXI")
+
+
+                });
+                    _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE CORONEL GUTIERREZ",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE DIVINO NIÑO")
+
+
+                });
+                  _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LAS PALMERAS",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE DIVINO NIÑO")
+
+
+                });
+                  _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE DIVINO NIÑO SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE DIVINO NIÑO")
+
+
+                });
+
+                   _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE EL PORTAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE DIVINO NIÑO")
+
+
+                });
+
+                   _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE JORGE ELIECER GAITAN SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JORGE ELIECER GAITAN")
+
+
+                });
+
+                    _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE SAN JUAN BOSCO",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JORGE ELIECER GAITAN")
+
+
+                });
+                   _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE SIMON BOLIVAR",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JORGE ELIECER GAITAN")
+
+
+                });
+                  _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LA VEGA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JUAN BAUTISTA LA SALLE")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE JUAN BAUTISTA LA SALLE SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JUAN BAUTISTA LA SALLE")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE SIETE DE AGOSTO",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JUAN BAUTISTA LA SALLE")
+
+
+                });_dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE JUAN BAUTISTA MIGANI SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE JUAN BAUTISTA MIGANI")
+
+
+                });
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE LA ESPERANZA SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LA ESPERANZA")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE ANTONIA SANTOS",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LA SALLE")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LA CONSOLATA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LA SALLE")
+
+
+                }); _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE LA SALLE SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LA SALLE")
+
+
+                });
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE LOS ANDES SEDE LOS ALPES",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LOS ANDES")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LA PAZ",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LOS PINOS")
+
+
+                });
+                
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LAS AMERICAS",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LOS PINOS")
+
+
+                });
+                
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE LOS PINOS SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE LOS PINOS")
+
+
+                });
+                
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LAS BRISAS",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE NORMAL SUPERIOR")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LOS ANGELES",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE NORMAL SUPERIOR")
+
+
+                });
+                
+                _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE NORMAL SUPERIOR SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE NORMAL SUPERIOR")
+
+
+                });
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE SAGRADOS CORAZONES SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE SAGRADOS CORAZONES")
+
+
+                });
+                
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE BOCANA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE SAN FRANCISCO DE ASIS")
+
+
+                });
+                
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE CIRCACIA",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE SAN FRANCISCO DE ASIS")
+
+
+                });
+                
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE ANTONIO MARIA TORASSO",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE TECNICO INDUSTRIAL")
+
+
+                });
+                
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "SEDE LA LIBERTAD",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE TECNICO INDUSTRIAL")
+
+
+                });
+                
+                 _dataContext.Sedes.Add(new Sedes
+                {
+
+                    NameSedes = "IE TECNICO INDUSTRIAL SEDE PRINCIPAL",
+                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE TECNICO INDUSTRIAL")
 
 
                 });

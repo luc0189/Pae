@@ -8,15 +8,43 @@
 <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
 
 
-
+<hr />
+<h2>Details</h2>
+<h4>Delivery Acta</h4>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Details</h2>
-                        <h4>Delivery Acta</h4>
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Entrega3)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Entrega3)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Entrega4)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Entrega4)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Entrega5)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Entrega5)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Entrega6)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Entrega6)
+                            </dd>
+
+                        </dl>
                     </div>
                     <div class="col-md-6">
                         <dl class="dl-horizontal">
@@ -32,12 +60,7 @@
                                 </h2>
 
                             </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Periodos.MonthDelivery)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Periodos.MonthDelivery)
-                            </dd>
+                          
                         </dl>
                     </div>
                 </div>
@@ -51,7 +74,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <a asp-action="DetailsDataActa" class="btn btn-primary" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-plus"></i> Add Data</a>
-                                   
+
 
                                 </div>
                             </div>
@@ -75,15 +98,7 @@
                                         <table class="table table-hover table-responsive table-striped display">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => model.DetailsDeliveries.FirstOrDefault().DocAcudiente)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => model.DetailsDeliveries.FirstOrDefault().FullNameAcudiente)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => model.DetailsDeliveries.FirstOrDefault().SiteDelivery)
-                                                    </th>
+
                                                     <th>
                                                         @Html.DisplayNameFor(model => model.DetailsDeliveries.FirstOrDefault().TelMovil)
                                                     </th>
@@ -93,7 +108,7 @@
                                                     <th>
                                                         Img2
                                                     </th>
-                                                   
+
                                                     <th>
                                                         Acciones
                                                     </th>
@@ -102,45 +117,37 @@
                                             <tbody>
                                                 @foreach (var item in Model.DetailsDeliveries)
                                                 {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DocAcudiente)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.FullNameAcudiente)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.SiteDelivery)
-                                                    </td>
+                                                    <tr>
 
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.TelMovil)
-                                                    </td>
 
-                                                    <td>
-                                                        @if (!string.IsNullOrEmpty(item.Imagedocl))
-                                                        {
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TelMovil)
+                                                        </td>
 
-                                                            <img src="@Url.Content(item.Imagedocl)" alt="Image" style="width:100px;height:100px;" />
+                                                        <td>
+                                                            @if (!string.IsNullOrEmpty(item.Imagedocl))
+                                                            {
 
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        @if (!string.IsNullOrEmpty(item.Imagedoc2))
-                                                        {
+                                                                <img src="@Url.Content(item.Imagedocl)" alt="Image" style="width:100px;height:100px;" />
 
-                                                            <img src="@Url.Content(item.Imagedoc2)" alt="Image" style="width:100px;height:100px;" />
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @if (!string.IsNullOrEmpty(item.Imagedoc2))
+                                                            {
 
-                                                        }
-                                                    </td>
-                                                    
-                                                    <td>
-                                                        <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                        <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                                <img src="@Url.Content(item.Imagedoc2)" alt="Image" style="width:100px;height:100px;" />
 
-                                                        <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
-                                                    </td>
-                                                </tr>
+                                                            }
+                                                        </td>
+
+                                                        <td>
+                                                            <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                            <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+
+                                                            <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                                        </td>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -249,4 +256,4 @@
         });
     </script>
 
-    }
+}

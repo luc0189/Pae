@@ -10,24 +10,10 @@ namespace Pae.web.Data.Entities
     {
         public int Id { get; set; }
 
-        [Display(Name ="Sitio de Entrega")]
-        [Required(ErrorMessage ="El campo {0} es Requerido")]
-        [MaxLength(120)]
-        public string SiteDelivery { get; set; }
-
-        [Display(Name = "Documento Acudiente")]
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
-        public int DocAcudiente { get; set; }
-
-        [Display(Name = "Nombre Acudiente")]
-        [Required(ErrorMessage = "El campo {0} es Requerido")]
-        [MaxLength(120)]
-        public string FullNameAcudiente { get; set; }
-
+       
         [Display(Name = "Telefono Movil")]
         public long  TelMovil { get; set; }
 
-       
        
         [Display(Name = "Doc Side 1")]
         public string Imagedocl { get; set; }

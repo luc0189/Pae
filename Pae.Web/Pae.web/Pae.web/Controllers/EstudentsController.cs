@@ -96,7 +96,7 @@ namespace Pae.web.Controllers
                 .Include(a => a.DeliveryActas)
                 .ThenInclude(d => d.DetailsDeliveries)
                 .Include(a => a.DeliveryActas)
-                .ThenInclude(p => p.Periodos)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (estudents == null)
             {
@@ -133,9 +133,12 @@ namespace Pae.web.Controllers
                     Document= model.Document,
                     DeliveryActas = new List<DeliveryActa>(),
                    FullName=model.FullName,
-                   Mesa=model.Mesa,
-                   Sedes= await _context.Sedes.FindAsync(model.SedeId)
-
+                   AcudienteName=model.AcudienteName,
+                   DocumentAcu=model.DocumentAcu,
+                   Jornada=model.Jornada,
+                   Mesas=model.Mesa,
+                   Sedes= await _context.Sedes.FindAsync(model.SedeId),
+                   AutDelivery=model.AutoDelivery
                 };
                 try
                 {
@@ -174,9 +177,12 @@ namespace Pae.web.Controllers
                 NOrden=estudents.NOrden,
                 FullName=estudents.FullName,
                 Id=estudents.Id,
-                Mesa=estudents.Mesa,
+                Mesa=estudents.Mesas,
                 SedeId=estudents.Sedes.Id,
-                Sedes= _combosHelpers.GetComboSedes()
+                AcudienteName=estudents.AcudienteName,
+                DocumentAcu=estudents.DocumentAcu,
+                Sedes= _combosHelpers.GetComboSedes(),
+                AutoDelivery=estudents.AutDelivery
             };
             return View(model);
         }
@@ -197,9 +203,11 @@ namespace Pae.web.Controllers
                     student.Sedes = await _context.Sedes.FindAsync(vista.SedeId);
                     student.FullName = vista.FullName;
                     student.Id = vista.Id;
-                    student.Mesa = vista.Mesa;
+                    student.Mesas = vista.Mesa;
                     student.NOrden = vista.NOrden;
-
+                    student.AutDelivery = vista.AutoDelivery;
+                    student.DocumentAcu = vista.DocumentAcu;
+                    student.AcudienteName = vista.AcudienteName;
                     try
                     {
                         _context.Estudents.Update(student);
@@ -273,9 +281,9 @@ namespace Pae.web.Controllers
             var model = new DeliveryActaViewModel
             {
 
-                EstudentId = employe.Id,
+                StudentID = employe.Id,
 
-                Periodos = _combosHelpers.GetComboPeriodoTypes(),
+                
                 Usucrea = User.Identity.Name
             };
             return View(model);
@@ -287,18 +295,20 @@ namespace Pae.web.Controllers
             {
                 var modelfull = new DeliveryActaViewModel
                 {
-                    EstudentId = model.EstudentId,
+                    StudentID = model.StudentID,
                     Usucrea = User.Identity.Name,
-                    PeriodoId = model.PeriodoId,
-                    Periodos = model.Periodos,
+                    Entrega3=model.Entrega3,
+                    Entrega4=model.Entrega4,
+                    Entrega5=model.Entrega5,
+                    Entrega6=model.Entrega6
 
                 };
                 var examen = await _converterHelper.ToCreditAsync(modelfull, true);
                 _context.DeliveryActas.Add(examen);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.EstudentId}");
+                return RedirectToAction($"Details/{model.StudentID}");
             }
-            model.Periodos = _combosHelpers.GetComboPeriodoTypes();
+           
             return View(model);
         }
 
@@ -310,7 +320,7 @@ namespace Pae.web.Controllers
             }
             var acta = await _context.DeliveryActas
                 .Include(e => e.Estudents)
-                .Include(p => p.Periodos)
+              
                 .Include(a => a.DetailsDeliveries)
                 .FirstOrDefaultAsync(a => a.Id == id);
             if (acta == null)
@@ -335,7 +345,7 @@ namespace Pae.web.Controllers
             }
             var acta = await _context.DeliveryActas
                 .Include(e => e.DetailsDeliveries)
-                .Include(p => p.Periodos)
+                
                 .Include(s => s.Estudents)
 
                 .FirstOrDefaultAsync(a => a.Id == id);
@@ -389,13 +399,12 @@ namespace Pae.web.Controllers
                 var modelfull = new DetailsActaViewModel
                 {
                     StudentId = model.StudentId,
-                    DocAcudiente = model.DocAcudiente,
-                    FullNameAcudiente=model.FullNameAcudiente,
+                   
                     ActaId=model.ActaId,
                     Imagedocl=frente,
                     Imagedoc2=reverso,
                     
-                    SiteDelivery = model.SiteDelivery,
+                 
                     TelMovil = model.TelMovil,
 
 
@@ -418,7 +427,7 @@ namespace Pae.web.Controllers
             }
             var deliveryActa = await _context.DeliveryActas
                 .Include(s => s.Estudents)
-                .Include(p=>p.Periodos)
+                
                 .FirstOrDefaultAsync(s => s.Id == id);
             if (deliveryActa == null)
             {
@@ -438,7 +447,7 @@ namespace Pae.web.Controllers
                     var deliveyActa = await _converterHelper.ToDeliveryActaAsync(model, false);
                     _context.DeliveryActas.Update(deliveyActa);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction($"{nameof(Details)}/{model.EstudentId}");
+                    return RedirectToAction($"{nameof(Details)}/{model.StudentID}");
                 }
                 catch (Exception e)
                 {

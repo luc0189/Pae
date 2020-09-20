@@ -9,7 +9,7 @@ namespace Pae.web.Data.Entities
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Codigo")]
-        public int NOrden { get; set; }
+        public string NOrden { get; set; }
 
         [Required(ErrorMessage ="El campo {0} es requerido")]
         [Display(Name ="Documento")]
@@ -22,9 +22,29 @@ namespace Pae.web.Data.Entities
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Nombre Acudiente")]
+        [MaxLength(100, ErrorMessage = "El campo {0} no puede superar los 100 caracteres")]
+        public string AcudienteName { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Documento Acudiente")]
+        [MaxLength(100, ErrorMessage = "El campo {0} no puede superar los 100 caracteres")]
+        public string DocumentAcu { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Mesa")]
         [MaxLength(20, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
-        public string Mesa { get; set; }
+        public string Mesas { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Jornada")]
+        [MaxLength(300, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
+        public string Jornada { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Entregas Autorizadas")]
+        [MaxLength(300, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
+        public string AutDelivery { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public Sedes Sedes { get; set; }

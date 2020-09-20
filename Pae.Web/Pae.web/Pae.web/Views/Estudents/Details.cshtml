@@ -4,16 +4,48 @@
     ViewData["Title"] = "Details";
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-<hr />
-<h2>Details: Estudents</h2>
 
+<hr />
+
+<div class="col-md-6">
+    <h2>Details: Estudents</h2>
+</div>
+<div class="col-md-6">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jornada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jornada)
+        </dd>
+        </dl>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
-
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.AutDelivery)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.AutDelivery)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Mesas)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Mesas)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.NOrden)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.NOrden)
+                            </dd>
+                        </dl>
                     </div>
                     <div class="col-md-6">
                         <dl class="dl-horizontal">
@@ -24,9 +56,7 @@
 
                             </dt>
                             <dd>
-                              
-                                    @Html.DisplayFor(model => model.Document)
-                              
+                                @Html.DisplayFor(model => model.Document)
 
                             </dd>
                             <dt>
@@ -34,6 +64,12 @@
                             </dt>
                             <dd>
                                 @Html.DisplayFor(model => model.FullName)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Sedes.NameSedes)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Sedes.NameSedes)
                             </dd>
                         </dl>
                     </div>
@@ -70,18 +106,26 @@
                                                     <th>
                                                         @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Id)
                                                     </th>
+
                                                     <th>
-                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().FechaCrea)
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Entrega3)
                                                     </th>
                                                     <th>
-                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Periodos.MonthDelivery)
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Entrega4)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Entrega5)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Entrega6)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Entrega7)
                                                     </th>
                                                     <th>
                                                         (#1) Entregado
                                                     </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => model.DeliveryActas.FirstOrDefault().Usucrea)
-                                                    </th>
+
                                                     <th>
                                                         Acciones
                                                     </th>
@@ -90,30 +134,38 @@
                                             <tbody>
                                                 @foreach (var item in Model.DeliveryActas)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Id)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.FechaCrea)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Periodos.MonthDelivery)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
-                                                        </td>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Id)
+                                                    </td>
 
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Usucrea)
-                                                        </td>
-                                                        <td>
-                                                            <a asp-action="EditDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                            <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
-                                                            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Entrega3)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Entrega4)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Entrega5)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Entrega6)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Entrega7)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
+                                                    </td>
 
-                                                        </td>
-                                                    </tr>
+
+                                                    <td>
+                                                        <a asp-action="EditDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                        <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+
+                                                    </td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>

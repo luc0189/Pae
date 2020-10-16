@@ -122,7 +122,7 @@ namespace Pae.web.Controllers
 
                         }
                         
-                       await _dataContext.SaveChangesAsync();
+                      
                         ViewBag.Success = $"Se Encontraron {reader.RowCount} Registros de los cuales {contadorSave} son Nuevos y {contadorUpdate} se actualizaron.";
                     }
                 }

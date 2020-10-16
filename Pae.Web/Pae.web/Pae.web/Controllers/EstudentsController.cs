@@ -27,7 +27,7 @@ namespace Pae.web.Controllers
             _context = context;
             _combosHelpers = combosHelpers;
             _converterHelper = converterHelper;
-           _imageHelper = imageHelper;
+            _imageHelper = imageHelper;
         }
         public async Task<IActionResult> SearchDoc(int? usr)
         {
@@ -40,6 +40,30 @@ namespace Pae.web.Controllers
                 var estudents = await _context.Estudents
                .Include(s => s.Sedes)
                .FirstOrDefaultAsync(m => m.Document == Convert.ToString(usr));
+                if (estudents == null)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction($"Details/{estudents.Id}");
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+        public async Task<IActionResult> Searchforeign(string nameForeing)
+        {
+            if (nameForeing == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var estudents = await _context.Estudents
+               .Include(s => s.Sedes)
+               .FirstOrDefaultAsync(m => m.Document == Convert.ToString(nameForeing));
                 if (estudents == null)
                 {
                     return NotFound();
@@ -93,10 +117,11 @@ namespace Pae.web.Controllers
 
             var estudents = await _context.Estudents
                 .Include(a => a.Sedes)
+                .ThenInclude(i => i.Institucion)
                 .Include(a => a.DeliveryActas)
                 .ThenInclude(d => d.DetailsDeliveries)
                 .Include(a => a.DeliveryActas)
-                
+
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (estudents == null)
             {
@@ -112,7 +137,7 @@ namespace Pae.web.Controllers
             var student = new EstudentViewModel
             {
                 Sedes = _combosHelpers.GetComboSedes(),
-                
+
             };
 
             student.Sedes = _combosHelpers.GetComboSedes();
@@ -129,16 +154,16 @@ namespace Pae.web.Controllers
             {
                 var student = new Estudents
                 {
-                    NOrden=model.NOrden,
-                    Document= model.Document,
+                    NOrden = model.NOrden,
+                    Document = model.Document,
                     DeliveryActas = new List<DeliveryActa>(),
-                   FullName=model.FullName,
-                   AcudienteName=model.AcudienteName,
-                   DocumentAcu=model.DocumentAcu,
-                   Jornada=model.Jornada,
-                   Mesas=model.Mesa,
-                   Sedes= await _context.Sedes.FindAsync(model.SedeId),
-                   AutDelivery=model.AutoDelivery
+                    FullName = model.FullName,
+                    AcudienteName = model.AcudienteName,
+                    DocumentAcu = model.DocumentAcu,
+                    Jornada = model.Jornada,
+                    Mesas = model.Mesa,
+                    Sedes = await _context.Sedes.FindAsync(model.SedeId),
+                    AutDelivery = model.AutoDelivery
                 };
                 try
                 {
@@ -146,12 +171,12 @@ namespace Pae.web.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception e )
+                catch (Exception e)
                 {
                     ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
                     return View(model);
                 }
-               
+
             }
             return View(model);
         }
@@ -165,7 +190,7 @@ namespace Pae.web.Controllers
             }
 
             var estudents = await _context.Estudents
-                .Include(s=>s.Sedes)
+                .Include(s => s.Sedes)
                 .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (estudents == null)
             {
@@ -173,21 +198,21 @@ namespace Pae.web.Controllers
             }
             var model = new EstudentViewModel
             {
-                Document=estudents.Document,
-                NOrden=estudents.NOrden,
-                FullName=estudents.FullName,
-                Id=estudents.Id,
-                Mesa=estudents.Mesas,
-                SedeId=estudents.Sedes.Id,
-                AcudienteName=estudents.AcudienteName,
-                DocumentAcu=estudents.DocumentAcu,
-                Sedes= _combosHelpers.GetComboSedes(),
-                AutoDelivery=estudents.AutDelivery
+                Document = estudents.Document,
+                NOrden = estudents.NOrden,
+                FullName = estudents.FullName,
+                Id = estudents.Id,
+                Mesa = estudents.Mesas,
+                SedeId = estudents.Sedes.Id,
+                AcudienteName = estudents.AcudienteName,
+                DocumentAcu = estudents.DocumentAcu,
+                Sedes = _combosHelpers.GetComboSedes(),
+                AutoDelivery = estudents.AutDelivery
             };
             return View(model);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EstudentViewModel vista)
@@ -220,7 +245,7 @@ namespace Pae.web.Controllers
                         return View(vista);
                     }
 
-                    
+
                 }
             }
 
@@ -238,8 +263,8 @@ namespace Pae.web.Controllers
             try
             {
                 var deliveryActa = await _context.DeliveryActas
-                    .Include(e=>e.Estudents)    
-                    .FirstOrDefaultAsync(d=>d.Id==id);
+                    .Include(e => e.Estudents)
+                    .FirstOrDefaultAsync(d => d.Id == id);
                 if (deliveryActa == null)
                 {
                     return NotFound();
@@ -257,10 +282,10 @@ namespace Pae.web.Controllers
 
             }
 
-          
+
         }
 
-       
+
 
         private bool EstudentsExists(int id)
         {
@@ -283,7 +308,7 @@ namespace Pae.web.Controllers
 
                 StudentID = employe.Id,
 
-                
+
                 Usucrea = User.Identity.Name
             };
             return View(model);
@@ -297,10 +322,10 @@ namespace Pae.web.Controllers
                 {
                     StudentID = model.StudentID,
                     Usucrea = User.Identity.Name,
-                    Entrega3=model.Entrega3,
-                    Entrega4=model.Entrega4,
-                    Entrega5=model.Entrega5,
-                    Entrega6=model.Entrega6
+                    Entrega3 = model.Entrega3,
+                    Entrega4 = model.Entrega4,
+                    Entrega5 = model.Entrega5,
+                    Entrega6 = model.Entrega6
 
                 };
                 var examen = await _converterHelper.ToCreditAsync(modelfull, true);
@@ -308,7 +333,7 @@ namespace Pae.web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction($"Details/{model.StudentID}");
             }
-           
+
             return View(model);
         }
 
@@ -320,7 +345,7 @@ namespace Pae.web.Controllers
             }
             var acta = await _context.DeliveryActas
                 .Include(e => e.Estudents)
-              
+
                 .Include(a => a.DetailsDeliveries)
                 .FirstOrDefaultAsync(a => a.Id == id);
             if (acta == null)
@@ -345,7 +370,7 @@ namespace Pae.web.Controllers
             }
             var acta = await _context.DeliveryActas
                 .Include(e => e.DetailsDeliveries)
-                
+
                 .Include(s => s.Estudents)
 
                 .FirstOrDefaultAsync(a => a.Id == id);
@@ -379,32 +404,32 @@ namespace Pae.web.Controllers
                 {
                     ruta = "wwwroot\\images\\Actas";
                     ruta2 = "~/images/Actas/";
-                    frente = await _imageHelper.UploadImageAsync(model.ImageDocfrente,ruta,ruta2);
+                    frente = await _imageHelper.UploadImageAsync(model.ImageDocfrente, ruta, ruta2, model.StudentId);
                 }
                 if (model.ImageDocReverso != null)
                 {
-                    
+
                     ruta = "wwwroot\\images\\Actas";
                     ruta2 = "~/images/Actas/";
-                    reverso = await _imageHelper.UploadImageAsync(model.ImageDocReverso,ruta,ruta2);
+                    reverso = await _imageHelper.UploadImageAsync(model.ImageDocReverso, ruta, ruta2, model.StudentId);
                 }
                 if (model.ImageDelivery != null)
                 {
                     ruta = "wwwroot\\images\\Deliveries";
                     ruta2 = "~/images/Deliveries/";
-                    delivery = await _imageHelper.UploadImageAsync(model.ImageDelivery,ruta,ruta2);
+                    delivery = await _imageHelper.UploadImageAsync(model.ImageDelivery, ruta, ruta2, model.StudentId);
                 }
 
-               
+
                 var modelfull = new DetailsActaViewModel
                 {
                     StudentId = model.StudentId,
-                   
-                    ActaId=model.ActaId,
-                    Imagedocl=frente,
-                    Imagedoc2=reverso,
-                    
-                 
+
+                    ActaId = model.ActaId,
+                    Imagedocl = frente,
+                    Imagedoc2 = reverso,
+
+
                     TelMovil = model.TelMovil,
 
 
@@ -414,9 +439,9 @@ namespace Pae.web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction($"DetailsActa/{model.ActaId}");
             }
-          
+
             return View(model);
-            }
+        }
 
 
         public async Task<IActionResult> EditDelivery(int? id)
@@ -427,13 +452,13 @@ namespace Pae.web.Controllers
             }
             var deliveryActa = await _context.DeliveryActas
                 .Include(s => s.Estudents)
-                
+
                 .FirstOrDefaultAsync(s => s.Id == id);
             if (deliveryActa == null)
             {
                 return NotFound();
             }
-           
+
             return View(_converterHelper.ToDeliveryActaViewModel(deliveryActa));
         }
         [HttpPost]
@@ -441,7 +466,7 @@ namespace Pae.web.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 try
                 {
                     var deliveyActa = await _converterHelper.ToDeliveryActaAsync(model, false);
@@ -454,12 +479,92 @@ namespace Pae.web.Controllers
 
                     throw;
                 }
-                
+
             }
             return View(model);
 
 
         }
+
+
+        public async Task<IActionResult> EditDetailsDelivery(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var deliveryActa = await _context.DetailsDeliveries
+                                .FirstOrDefaultAsync(s => s.Id == id);
+            if (deliveryActa == null)
+            {
+                return NotFound();
+            }
+
+            return View(_converterHelper.ToEditDetailsActaViewModel(deliveryActa));
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditDetailsDelivery(DetailsDeliveryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var fullModel = new DetailsDelivery
+                {
+                    Id = model.IdActa,
+                    Imagedoc2 = model.Imagedoc2,
+                    Imagedocl = model.Imagedocl,
+                    TelMovil = model.TelMovil
+                };
+
+                try
+                {
+
+                    _context.DetailsDeliveries.Update(fullModel);
+                    await _context.SaveChangesAsync();
+                    //return RedirectToAction($"DetailsActa/{ model.IdActa}");
+                    return RedirectToAction($"{nameof(DetailsActa)}/{model.IdActa}");
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+
+            }
+            return View(model);
+
+
+        }
+        public async Task<IActionResult> DeleteDetailsActa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var deliveryActa = await _context.DetailsDeliveries
+                   
+                    .FirstOrDefaultAsync(d => d.Id == id);
+                if (deliveryActa == null)
+                {
+                    return NotFound();
+                }
+                _context.DetailsDeliveries.Remove(deliveryActa);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"DetailsActa/{deliveryActa.Id}");
+
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = $"Excepcion no Controlada: {e.Message} mas detalles:{e.InnerException}";
+                return NotFound();
+
+
+            }
+
+
+        }
     }
-    }
+}
 

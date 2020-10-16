@@ -9,10 +9,10 @@ namespace Pae.web.Helpers
 {
     public class ImageHelper : IImageHelper
     {
-        public async Task<string> UploadImageAsync(IFormFile imageFile,string ruta,string urlImage)
+        public async Task<string> UploadImageAsync(IFormFile imageFile,string ruta,string urlImage,int idStudent)
         {
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
+            var file = $"{guid}-{idStudent}.jpg";
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 ruta,

@@ -1,0 +1,34 @@
+﻿@model Pae.web.Models.DetailsDeliveryViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<hr />
+<form asp-action="EditDetailsDelivery">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Edit</h2>
+                    <h4>Period Delivery</h4>
+                </div>
+                <div class="panel-body">
+                    <input type="hidden" asp-for="IdActa" />
+
+                    <partial name="_DetailsDelivery" />
+
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Details" asp-route-id="@Model.IdActa" class="btn btn-success">Back to Acta</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>

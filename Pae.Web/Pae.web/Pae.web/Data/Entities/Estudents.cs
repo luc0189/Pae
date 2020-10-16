@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Pae.web.Data.Entities
@@ -45,6 +46,8 @@ namespace Pae.web.Data.Entities
         [Display(Name = "Entregas Autorizadas")]
         [MaxLength(300, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
         public string AutDelivery { get; set; }
+
+        public DateTime FechaActualización { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public Sedes Sedes { get; set; }

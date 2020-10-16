@@ -15,6 +15,7 @@ namespace Pae.web.Data.Entities
         public bool Entrega6 { get; set; }
         public bool Entrega7 { get; set; }
         public string Usucrea { get; set; }
+        public DateTime FechaActualización { get; set; }
         public Estudents Estudents { get; set; }
        
         public ICollection<DetailsDelivery> DetailsDeliveries { get; set; }

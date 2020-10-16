@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
 <hr />
 
 <div class="col-md-6">
-    <h2>Details: Estudents</h2>
+    <h4>Details: Estudents</h4>
 </div>
 <div class="col-md-6">
     <dl class="dl-horizontal">
@@ -18,7 +18,7 @@
         <dd>
             @Html.DisplayFor(model => model.Jornada)
         </dd>
-        </dl>
+    </dl>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -44,6 +44,18 @@
                             </dt>
                             <dd>
                                 @Html.DisplayFor(model => model.NOrden)
+                            </dd>
+                            <dt>
+                                Id Institucion
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Sedes.Institucion.Id)
+                            </dd>
+                            <dt>
+                                Id Sede
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Sedes.Id)
                             </dd>
                         </dl>
                     </div>
@@ -134,38 +146,38 @@
                                             <tbody>
                                                 @foreach (var item in Model.DeliveryActas)
                                                 {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Id)
-                                                    </td>
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Id)
+                                                        </td>
 
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Entrega3)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Entrega4)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Entrega5)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Entrega6)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Entrega7)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
-                                                    </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Entrega3)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Entrega4)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Entrega5)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Entrega6)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Entrega7)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DetailsDeliveries.Count)
+                                                        </td>
 
 
-                                                    <td>
-                                                        <a asp-action="EditDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                        <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
-                                                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                                        <td>
+                                                            <a asp-action="EditDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                            <a asp-action="DetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
 
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -196,7 +208,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    
     <script type="text/javascript">
         $(document).ready(function () {
             // Delete item

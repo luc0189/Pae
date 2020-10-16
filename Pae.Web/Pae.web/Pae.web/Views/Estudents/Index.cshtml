@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 
 <hr />
@@ -20,8 +21,8 @@
                         <div class="input-group">
                             <input type="number" class="form-control" name="usr" placeholder="Numero Documento" required autofocus>
                             <div class="input-group-btn">
-                                <input type="submit" class="btn btn-default" name="submit1" value="Buscar" /> 
-                                
+                                <input type="submit" class="btn btn-default" name="submit1" value="Buscar" />
+
                             </div>
 
                         </div>
@@ -43,7 +44,22 @@
 
                     </form>
                 </div>
+                <div class=" row">
+                    <div class="col-md-12">
+                        <form action="/Estudents/Searchforeign" id="shForeingName" method="get">
 
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nameForeing" placeholder="Documento + letras" required autofocus>
+                                <div class="input-group-btn">
+                                    <input type="submit" name="submit2" class="btn btn-default" value="Buscar" />
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
 
             </div>
             <div class="panel-footer">
@@ -59,7 +75,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    
     <script type="text/javascript">
         $(document).ready(function () {
             // Delete item

@@ -4,8 +4,8 @@
     ViewData["Title"] = "Details";
 }
 
-<link rel="stylesheet" href="cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 
 <hr />
@@ -60,7 +60,7 @@
                                 </h2>
 
                             </dd>
-                          
+
                         </dl>
                     </div>
                 </div>
@@ -142,10 +142,9 @@
                                                         </td>
 
                                                         <td>
-                                                            <a asp-action="EditEndowment" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                            <a asp-action="AddDetailsActa" class="btn btn-info" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"></i></a>
+                                                            <a asp-action="EditDetailsDelivery" class="btn btn-warning" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
 
-                                                            <button data-id="@item.Id" class="btn btn-danger deleteEndowment" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
                                                         </td>
                                                     </tr>
                                                 }
@@ -174,9 +173,11 @@
         </div>
     </div>
 </div>
+<partial name="_DeleteDialogModal" />
+<partial name="_Exepction" />
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="//https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -185,6 +186,8 @@
             var current = 1;
             var steps = $("fieldset").length;
 
+            var item_to_delete;
+            var action_to_delete;
             setProgressBar(current);
 
             $(".next").click(function () {
@@ -253,7 +256,21 @@
                 return false;
             })
 
+          
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Estudents/DeleteDetailsActa/' + item_to_delete;
+            });
+
         });
+
+
+
     </script>
 
 }

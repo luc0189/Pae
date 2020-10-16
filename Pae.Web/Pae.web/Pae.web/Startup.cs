@@ -57,11 +57,17 @@ namespace Pae.web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.AddDbContext<DataContext>(cfg =>
+            //{
+            //    cfg.UseSqlServer(Configuration.GetConnectionString("ConnectionServer"), t => t.CommandTimeout(60000));
+            //});
 
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), t=>t.CommandTimeout(600));
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), t=>t.CommandTimeout(60000));
+             
             });
+
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICombosHelpers, CombosHelpers>();

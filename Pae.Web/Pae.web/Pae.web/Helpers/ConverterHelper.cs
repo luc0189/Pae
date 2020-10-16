@@ -118,6 +118,7 @@ namespace Pae.web.Helpers
                 Entrega7=deliveryActa.Entrega7
             };
         }
+      
 
         public async Task<DeliveryActa> ToDeliveryActaAsync(DeliveryActaViewModel model, bool isNew)
         {
@@ -134,5 +135,20 @@ namespace Pae.web.Helpers
                 Estudents = await _dataContext.Estudents.FindAsync(model.StudentID)
             };
         }
+     
+
+        public DetailsDeliveryViewModel ToEditDetailsActaViewModel(DetailsDelivery deliveryActa)
+        {
+            return new DetailsDeliveryViewModel
+            {
+                IdActa = deliveryActa.Id,
+                TelMovil=deliveryActa.TelMovil,
+              Imagedoc2=deliveryActa.Imagedoc2,
+              Imagedocl=deliveryActa.Imagedocl
+               
+
+            };
+        }
+
     }
 }

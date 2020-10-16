@@ -14,7 +14,8 @@ namespace Pae.web.Data.Entities
         [Display(Name = "Telefono Movil")]
         public long  TelMovil { get; set; }
 
-       
+        public DateTime FechaActualización { get; set; }
+
         [Display(Name = "Doc Side 1")]
         public string Imagedocl { get; set; }
         public string ImageDoc1FullPath => string.IsNullOrEmpty(Imagedocl)

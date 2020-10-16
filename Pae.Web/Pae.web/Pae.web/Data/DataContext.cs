@@ -22,6 +22,7 @@ namespace Pae.web.Data
         public DbSet<Institucion> Institucions { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Sedes> Sedes { get; set; }
+        public DbSet<Sincro> Sincros { get; set; }
        
     }
 }

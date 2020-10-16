@@ -8,6 +8,6 @@ namespace Pae.web.Data.Entities
     public class Sincro
     {
         public int Id { get; set; }
-        public DateTime EndUpdate { get; set; }
+        public string EndUpdate { get; set; }
     }
 }

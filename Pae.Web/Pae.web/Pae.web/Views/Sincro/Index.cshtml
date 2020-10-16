@@ -1,36 +1,45 @@
-﻿@model IEnumerable<Pae.web.Data.Entities.Sincro>
-    <hr />
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>Recibir datos</strong>
-                    @foreach (var item in Model)
-                    {
-                        <input type="text" name="name" value="@Html.DisplayFor(modelItem => item.EndUpdate)" />
-                    }
-                    </div>
-                <div class="panel-body">
+﻿@model Pae.web.Data.Entities.Sincro
+@{
+    ViewData["Title"] = "Index";
+}
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Recibir datos</strong>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EndUpdate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EndUpdate)
+                    </dd>
+                </dl>
+                @*<input type="text" name="name" value=@Html.DisplayFor(model => model.EndUpdate) />*@
 
-                </div>
-                <div class="panel-footer">
+            </div>
+            <div class="panel-body">
 
-                </div>
+            </div>
+            <div class="panel-footer">
+
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>Enviar datos</strong>
-                </div>
-                <div class="panel-body">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Enviar datos</strong>
+            </div>
+            <div class="panel-body">
 
-                </div>
-                <div class="panel-footer">
+            </div>
+            <div class="panel-footer">
 
-                </div>
             </div>
         </div>
     </div>
+</div>

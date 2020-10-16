@@ -23,6 +23,7 @@ namespace Pae.web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
+            await ChekSincroAsyn();
             await ChekIntitucionAsyn();
             await ChekSiteAsyn();
             //await ChekStudentAsyn();
@@ -36,7 +37,23 @@ namespace Pae.web.Data
 
 
         }
-      
+        private async Task ChekSincroAsyn()
+        {
+            if (!_dataContext.Sincros.Any())
+            {
+                _dataContext.Sincros.Add(new Sincro
+                {
+
+                    EndUpdate = "2020-01-01 23:00"
+                }) ;
+               
+               
+                await _dataContext.SaveChangesAsync();
+            }
+        }
+
+
+
 
         private async Task ChekIntitucionAsyn()
         {
@@ -55,7 +72,7 @@ namespace Pae.web.Data
                 _dataContext.Institucions.Add(new Institucion
                 {
 
-                    NameIntitucion = "IE ANTONIO RICAURTE "
+                    NameIntitucion = "IE ANTONIO RICAURTE"
                 });
                 _dataContext.Institucions.Add(new Institucion
                 {
@@ -70,7 +87,7 @@ namespace Pae.web.Data
                 _dataContext.Institucions.Add(new Institucion
                 {
 
-                    NameIntitucion = "IE CIUDADELA SIGLO XXI "
+                    NameIntitucion = "IE CIUDADELA SIGLO XXI"
                 });
                 _dataContext.Institucions.Add(new Institucion
                 {
@@ -142,14 +159,7 @@ namespace Pae.web.Data
 
                 }); 
               
-                _dataContext.Sedes.Add(new Sedes
-                {
-
-                    NameSedes = "IE AGROECOLOGICO AMAZONICO BUINAIMA SEDE PRINCIPAL",
-                    Institucion = await _dataContext.Institucions.FirstAsync(o => o.NameIntitucion == "IE AGROECOLOGICO AMAZONICO BUINAIMA")
-
-
-                });
+                
                 _dataContext.Sedes.Add(new Sedes
                 {
 

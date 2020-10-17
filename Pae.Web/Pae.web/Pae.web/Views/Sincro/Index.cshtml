@@ -1,41 +1,59 @@
-﻿@model Pae.web.Data.Entities.Sincro
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model  IEnumerable<Pae.web.Data.Entities.Sincro>
+ @{
+ ViewData["Title"]="Index" ;
+ }
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <strong>Recibir datos</strong>
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.EndUpdate)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.EndUpdate)
-                    </dd>
-                </dl>
-                @*<input type="text" name="name" value=@Html.DisplayFor(model => model.EndUpdate) />*@
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Recibir datos</strong>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <label>Fecha Ultima Actualizacion</label>
+                                <input type="text" name="name" id="date" value="@Html.DisplayFor(modelItem => item.EndUpdate)" />
+                            </div>
+                        </div>
+                    </div>
 
-            </div>
-            <div class="panel-body">
+                </div>
+                <div class="panel-body">
+                    <a asp-action="GetStudentList" asp-route-id="@item.Id" class="btn btn-primary">Recibir...</a>
+                    <button data-id="@item.EndUpdate" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+                <div class="panel-footer">
 
+                </div>
             </div>
-            <div class="panel-footer">
-
-            </div>
+        }
         </div>
-    </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Enviar datos</strong>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Enviar datos</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label>Fecha Ultimo Envio</label>
+                            <input type="text" name="name" value=" @foreach (var item in Model)
+                {
+                    @Html.DisplayFor(modelItem => item.EndUpdate)
+                }" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-body">
-
+                <button class="btn btn-primary">Enviar...</button>
             </div>
             <div class="panel-footer">
 

@@ -10,16 +10,7 @@
 <div class="col-md-6">
     <h4>Details: Estudents</h4>
 </div>
-<div class="col-md-6">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Jornada)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Jornada)
-        </dd>
-    </dl>
-</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -45,12 +36,7 @@
                             <dd>
                                 @Html.DisplayFor(model => model.NOrden)
                             </dd>
-                            <dt>
-                                Id Institucion
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Sedes.Institucion.Id)
-                            </dd>
+                           
                             <dt>
                                 Id Sede
                             </dt>
@@ -83,6 +69,12 @@
                             <dd>
                                 @Html.DisplayFor(model => model.Sedes.NameSedes)
                             </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Jornada)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Jornada)
+                            </dd>
                         </dl>
                     </div>
                 </div>
@@ -106,10 +98,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-
-                                    <h4>Actas de Entrega</h4>
-                                </div>
+                               
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table table-hover table-responsive table-striped display">

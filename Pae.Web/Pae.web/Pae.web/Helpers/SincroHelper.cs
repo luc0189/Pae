@@ -10,13 +10,13 @@ namespace Pae.web.Helpers
     public class SincroHelper
     {
         public SqlConnection conexionsql;
-        public void CadenaConexionsql()
+        //public void CadenaConexionsql()
+        //{
+        //    conexionsql = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
+        //}
+        public DataSet SqlConsulta(String SQL)
         {
-            conexionsql = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
-        }
-        public DataSet sqlconsulta(String SQL)
-        {
-            SqlConnection sqlconn = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
+            SqlConnection sqlconn = new SqlConnection("Data Source=45.71.180.58,7744;Initial Catalog=Pae;Persist Security Info=True;User ID=sa;Password=cafe123.;User Instance=False");
             SqlCommand comando = new SqlCommand(SQL, sqlconn);
             comando.CommandTimeout = 0;
             SqlDataAdapter datos = new SqlDataAdapter(comando);
@@ -38,10 +38,10 @@ namespace Pae.web.Helpers
             }
             return tabla;
         }
-        public int sqlProcedimiento(string SQL)
+        public int SqlProcedimiento(string SQL)
         {
             int registrossql = 0;
-            SqlConnection conexionsql = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
+            SqlConnection conexionsql = new SqlConnection("Data Source=45.71.180.58,7744;Initial Catalog=Pae;Persist Security Info=True;User ID=sa;Password=cafe123.;User Instance=False");
             conexionsql.Open();
             SqlCommand comandosql = conexionsql.CreateCommand();
             comandosql.CommandTimeout = 0;
@@ -69,33 +69,33 @@ namespace Pae.web.Helpers
             return registrossql;
         }
 
-        public bool AbriConexionsql()
-        {
-            try
-            {
-                conexionsql.Open();
-                return true;
-            }
-            catch (SqlException ex)
-            {
-                return false;
-                throw ex;
-            }
-        }
+        //public bool AbriConexionsql()
+        //{
+        //    try
+        //    {
+        //        conexionsql.Open();
+        //        return true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        return false;
+        //        throw ex;
+        //    }
+        //}
 
-        public bool CerrarConexionsql()
-        {
-            try
-            {
-                conexionsql.Close();
-                return true;
-            }
-            catch (SqlException ex)
-            {
-                return false;
-                throw ex;
-            }
+        //public bool CerrarConexionsql()
+        //{
+        //    try
+        //    {
+        //        conexionsql.Close();
+        //        return true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        return false;
+        //        throw ex;
+        //    }
 
-        }
+        //}
     }
 }

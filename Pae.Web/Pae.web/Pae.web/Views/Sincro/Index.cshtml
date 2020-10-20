@@ -7,24 +7,68 @@
     <div class="col-md-12">
         @foreach (var item in Model)
         {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Recibir datos</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label>Fecha Ultima Actualizacion</label>
+                            <input type="text" name="name" id="date" value="@Html.DisplayFor(modelItem => item.EndUpdate)" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <a asp-action="GetStudentList" asp-route-id="@item.Id" class="btn btn-primary">Recibir Estudiantes...</a>
+                <a asp-action="GetInstitucionList" asp-route-id="@item.Id" class="btn btn-primary">Recibir Instituciones...</a>
+                <a asp-action="GetSedesList" asp-route-id="@item.Id" class="btn btn-primary">Recibir Sedes...</a>
+                <a asp-action="GetActasList" asp-route-id="@item.Id" class="btn btn-primary">Recibir Actas...</a>
+
+
+            </div>
+            <div class="text-danger">
+                <p>
+                    @ViewBag.Message
+                </p>
+            </div>
+            <div class="panel-footer">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progress" runat="server" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        }
+        </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var item in Model)
+        {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Recibir datos</strong>
+                            <strong>Enviar datos</strong>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group">
-                                <label>Fecha Ultima Actualizacion</label>
-                                <input type="text" name="name" id="date" value="@Html.DisplayFor(modelItem => item.EndUpdate)" />
+                                <label>Fecha Ultimo Envio</label>
+                                <input type="text" name="name" value="
+                    @Html.DisplayFor(modelItem => item.EndUpdate)
+               " />
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="panel-body">
-                    <a asp-action="GetStudentList" asp-route-id="@item.Id" class="btn btn-primary">Recibir...</a>
-                    <button data-id="@item.EndUpdate" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+
+                    <a asp-action="PostStudentList" asp-route-id="@item.Id" class="btn btn-primary">Enviar Estudiantes...</a>
+
+                    
                 </div>
                 <div class="panel-footer">
 
@@ -32,32 +76,4 @@
             </div>
         }
         </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Enviar datos</strong>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <label>Fecha Ultimo Envio</label>
-                            <input type="text" name="name" value=" @foreach (var item in Model)
-                {
-                    @Html.DisplayFor(modelItem => item.EndUpdate)
-                }" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-body">
-                <button class="btn btn-primary">Enviar...</button>
-            </div>
-            <div class="panel-footer">
-
-            </div>
-        </div>
-    </div>
 </div>

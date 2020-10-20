@@ -318,6 +318,10 @@ namespace Pae.web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //UPDATE field sequence in table ActasSequences
+
+                ActaSequence nextSequence = _context.ActaSequences.Single();
+
                 var modelfull = new DeliveryActaViewModel
                 {
                     StudentID = model.StudentID,
@@ -325,11 +329,16 @@ namespace Pae.web.Controllers
                     Entrega3 = model.Entrega3,
                     Entrega4 = model.Entrega4,
                     Entrega5 = model.Entrega5,
-                    Entrega6 = model.Entrega6
-
+                    Entrega6 = model.Entrega6,
+                    Prefix = nextSequence.Prefix,
+                    PrefixSequence = nextSequence.Sequence
                 };
                 var examen = await _converterHelper.ToCreditAsync(modelfull, true);
                 _context.DeliveryActas.Add(examen);
+
+                // Incremento la secuencia
+                nextSequence.Sequence += 1;
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction($"Details/{model.StudentID}");
             }

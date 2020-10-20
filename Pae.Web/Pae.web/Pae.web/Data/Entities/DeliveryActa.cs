@@ -8,7 +8,15 @@ namespace Pae.web.Data.Entities
     public class DeliveryActa
     {
         public int Id { get; set; }
+     
+      //public int IdActa { get; set; }
         public DateTime FechaCrea { get; set; }
+
+        public string Prefix { get; set; }
+
+        // ActaSecuence.Sequence
+        public int PrefixSequence { get; set; }
+
         public bool Entrega3 { get; set; }
         public bool Entrega4 { get; set; }
         public bool Entrega5 { get; set; }

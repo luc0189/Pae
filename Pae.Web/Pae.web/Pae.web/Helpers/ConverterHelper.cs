@@ -51,8 +51,9 @@ namespace Pae.web.Helpers
                Entrega4=model.Entrega4,
                Entrega5=model.Entrega5,
                Entrega6=model.Entrega6,
-               Entrega7=model.Entrega7
-
+               Entrega7=model.Entrega7,
+               Prefix=model.Prefix,
+               PrefixSequence=model.PrefixSequence
 
             };
         }

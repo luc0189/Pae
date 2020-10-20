@@ -23,6 +23,7 @@ namespace Pae.web.Data
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Sedes> Sedes { get; set; }
         public DbSet<Sincro> Sincros { get; set; }
+        public DbSet<ActaSequence> ActaSequences { get; set; }
        
     }
 }

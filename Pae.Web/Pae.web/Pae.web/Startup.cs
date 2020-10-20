@@ -64,7 +64,8 @@ namespace Pae.web
 
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), t=>t.CommandTimeout(60000));
+                //cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), t=>t.CommandTimeout(0));
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
              
             });
 

@@ -6,6 +6,7 @@ namespace Pae.web.Data.Entities
 {
     public class Sedes
     {
+
         public int Id { get; set; }
 
         [Display(Name = "Nombre De la Sede")]

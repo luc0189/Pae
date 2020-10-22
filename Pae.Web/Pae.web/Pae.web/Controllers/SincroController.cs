@@ -99,6 +99,7 @@ namespace Pae.web.Controllers
                             };
 
                             newEstudents.Add(newEstudent);
+
                             contadorSave++;
                         }
                         else
@@ -260,6 +261,7 @@ namespace Pae.web.Controllers
                     foreach (DataRow dr in fileName.Tables[0].Rows)
                     {
 
+                        int ids = (int)dr["Id"];
                         string fullName = dr["NameSedes"].ToString();
                         string idSede = dr["IdSede"].ToString();
                         string dateUpdate = dr["FechaActualización"].ToString();
@@ -271,6 +273,7 @@ namespace Pae.web.Controllers
                         {
                             _context.Sedes.Add(new Sedes()
                             {
+                                Id=ids,
                                 NameSedes = fullName,
                                 IdSedes=idSede,
                                 FechaActualización = Convert.ToDateTime(dateUpdate),
@@ -348,6 +351,10 @@ namespace Pae.web.Controllers
 
                     List<DeliveryActa> newDeliveryActas = new List<DeliveryActa>();
 
+                    List<Estudents> localStudents = await _context.Estudents.ToListAsync();
+
+                    _context.ChangeTracker.AutoDetectChangesEnabled = false;
+
                     foreach (DataRow dr in fileName.Tables[0].Rows)
                     {
                         string entrega3 = dr["Entrega3"].ToString();
@@ -357,8 +364,8 @@ namespace Pae.web.Controllers
                         string entrega7 = dr["Entrega7"].ToString();
                         string doc = dr["Document"].ToString();
                         int idStudent = Convert.ToInt32(dr["EstudentsId"]);
-                        
-                        
+
+
                         string dateUpdate = dr["FechaActualización"].ToString();
                         string prefix = dr["Prefix"].ToString();
                         int numSequence = Convert.ToInt32(dr["PrefixSequence"]);
@@ -380,14 +387,14 @@ namespace Pae.web.Controllers
                                 Entrega5 = Convert.ToBoolean(entrega5),
                                 Entrega6 = Convert.ToBoolean(entrega6),
                                 Entrega7 = Convert.ToBoolean(entrega7),
-                                Estudents= await _context.Estudents.FindAsync(doc),
+                                Estudents = localStudents.Single(t => t.Document == doc),
                                 Prefix = prefix,
-                                PrefixSequence= numSequence,
+                                PrefixSequence = numSequence,
                                 FechaActualización = Convert.ToDateTime(dateUpdate)
                             };
 
                             _context.DeliveryActas.Add(newOrUpdatedDeliveryActa);
-                            await _context.SaveChangesAsync();
+
                             contadorSave++;
                         }
                         else
@@ -400,6 +407,9 @@ namespace Pae.web.Controllers
                             }
                         }
                     }
+
+                    _context.ChangeTracker.AutoDetectChangesEnabled = true;
+                    _context.ChangeTracker.DetectChanges();
 
                     await _context.SaveChangesAsync();
                     return ViewBag.Success = $"Se Encontraron {fileName.Tables[0].Rows.Count} Registros de los cuales {contadorSave} son Nuevos y {contadorUpdate} se actualizaron.";

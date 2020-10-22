@@ -16,7 +16,7 @@ namespace Pae.web.Helpers
         //}
         public DataSet SqlConsulta(String SQL)
         {
-            SqlConnection sqlconn = new SqlConnection("Data Source=192.168.1.9;Initial Catalog=Pae_dev;Persist Security Info=True;User ID=sa;Password=cafe123.;User Instance=False");
+            SqlConnection sqlconn = new SqlConnection("Data Source=45.71.180.58,7744;Initial Catalog=Pae_dev;Persist Security Info=True;User ID=sa;Password=cafe123.;User Instance=False");
             SqlCommand comando = new SqlCommand(SQL, sqlconn);
             comando.CommandTimeout = 0;
             SqlDataAdapter datos = new SqlDataAdapter(comando);

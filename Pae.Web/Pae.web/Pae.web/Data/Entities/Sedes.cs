@@ -12,6 +12,10 @@ namespace Pae.web.Data.Entities
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [MaxLength(70, ErrorMessage = "El Campo {0} acepta solo {1} caracteres.")]
         public string NameSedes { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        [MaxLength(70, ErrorMessage = "El Campo {0} acepta solo {1} caracteres.")]
+        public string IdSedes { get; set; }
         public DateTime FechaActualización { get; set; }
         public Institucion Institucion { get; set; }
 

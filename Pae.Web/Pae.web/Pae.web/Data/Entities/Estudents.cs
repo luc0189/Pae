@@ -47,6 +47,11 @@ namespace Pae.web.Data.Entities
         [MaxLength(300, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
         public string AutDelivery { get; set; }
 
+      
+        [Display(Name = "Segunda Sede")]
+        [MaxLength(300, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
+        public string sedes2 { get; set; }
+
         public DateTime FechaActualización { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]

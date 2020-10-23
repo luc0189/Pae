@@ -36,6 +36,15 @@ namespace Pae.web.Models
             sql = $@"select * 
                         from DeliveryActas d 
                             inner join Estudents es on es.id=d.EstudentsId
+                            inner join DetailsDeliveries dt on dt.DeliveryActaId=d.id
+                            where d.FechaActualización>'{dateUpdate}' ";
+            return dataload.SqlConsulta(sql);
+        }
+        internal DataSet DetallesActasServer(string dateUpdate) //--select para obtener los datos a sincronizar
+        {
+            sql = $@"select * 
+                        from DetailsDeliveries dt
+                            inner join DeliveryActas d on d.id=dt.DeliveryActaId
                             where d.FechaActualización>'{dateUpdate}' ";
             return dataload.SqlConsulta(sql);
         }

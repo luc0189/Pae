@@ -163,6 +163,7 @@ namespace Pae.web.Controllers
                     Jornada = model.Jornada,
                     Mesas = model.Mesa,
                     Sedes = await _context.Sedes.FindAsync(model.SedeId),
+                    FechaActualización=DateTime.Now,
                     AutDelivery = model.AutoDelivery
                 };
                 try
@@ -207,7 +208,9 @@ namespace Pae.web.Controllers
                 AcudienteName = estudents.AcudienteName,
                 DocumentAcu = estudents.DocumentAcu,
                 Sedes = _combosHelpers.GetComboSedes(),
+                FechaActualizacion=DateTime.Now,
                 AutoDelivery = estudents.AutDelivery
+                
             };
             return View(model);
         }

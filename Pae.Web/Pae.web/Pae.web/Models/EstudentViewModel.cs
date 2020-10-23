@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Pae.web.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -43,6 +44,10 @@ namespace Pae.web.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Entregas")]
         public string AutoDelivery { get; set; }
+
+       
+        [Display(Name = "time")]
+        public DateTime FechaActualizacion { get; set; }
 
         [Required(ErrorMessage = "The Field {0} is mandatory.")]
         [Display(Name = "Sede")]

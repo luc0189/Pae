@@ -32,9 +32,26 @@ namespace Pae.web.Controllers
             return View(await _context.Sincros.ToListAsync());
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Index(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        ViewBag.Message = $"Seleccione un Documento de Excel";
+        //    }
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
 
-        public async Task<IActionResult> GetStudentList(int? id)
+            public async Task<IActionResult> GetStudentList(int? id)
         {
             if (id == null)
             {
@@ -65,8 +82,6 @@ namespace Pae.web.Controllers
 
                     foreach (DataRow dr in fileName.Tables[0].Rows)
                     {
-                        //Muestras los valores obteniendolos con el Índice o el Nombre de la columna, 
-                        //   de la siguiente manera:
                         string nOder = dr["NOrden"].ToString();
                         string doc = dr["Document"].ToString();
                         string fullName = dr["FullName"].ToString();
@@ -348,15 +363,16 @@ namespace Pae.web.Controllers
                     int contadorSave = 0;
                     int contadorUpdate = 0;
                     var localDeliveryActas = _context.DeliveryActas.ToList();
-
+                    var localDetailsDeliveryActas = _context.DetailsDeliveries.ToList();
                     List<DeliveryActa> newDeliveryActas = new List<DeliveryActa>();
-
+                  
                     List<Estudents> localStudents = await _context.Estudents.ToListAsync();
 
                     _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
                     foreach (DataRow dr in fileName.Tables[0].Rows)
                     {
+                        int remoteActaId = (int)dr["Id"];
                         string entrega3 = dr["Entrega3"].ToString();
                         string entrega4 = dr["Entrega4"].ToString();
                         string entrega5 = dr["Entrega5"].ToString();
@@ -364,17 +380,12 @@ namespace Pae.web.Controllers
                         string entrega7 = dr["Entrega7"].ToString();
                         string doc = dr["Document"].ToString();
                         int idStudent = Convert.ToInt32(dr["EstudentsId"]);
-
-
                         string dateUpdate = dr["FechaActualización"].ToString();
                         string prefix = dr["Prefix"].ToString();
                         int numSequence = Convert.ToInt32(dr["PrefixSequence"]);
 
-                        //var exits = await _context.DeliveryActas 
-                        //            .Include(es => es.Estudents)
-                        //           .FirstOrDefaultAsync(s => s.Prefix == prefix && s.PrefixSequence == Convert.ToInt32(numSequence));
-
-                        DeliveryActa newOrUpdatedDeliveryActa = null;
+                        DeliveryActa newOrUpdatedDeliveryActa = new DeliveryActa();
+                        
 
                         newOrUpdatedDeliveryActa = localDeliveryActas.SingleOrDefault(t => t.Prefix == prefix && t.PrefixSequence == numSequence);
 
@@ -387,13 +398,40 @@ namespace Pae.web.Controllers
                                 Entrega5 = Convert.ToBoolean(entrega5),
                                 Entrega6 = Convert.ToBoolean(entrega6),
                                 Entrega7 = Convert.ToBoolean(entrega7),
-                                Estudents = localStudents.Single(t => t.Document == doc),
+                                Estudents =  localStudents.Single(t => t.Document == doc),
                                 Prefix = prefix,
                                 PrefixSequence = numSequence,
                                 FechaActualización = Convert.ToDateTime(dateUpdate)
                             };
 
                             _context.DeliveryActas.Add(newOrUpdatedDeliveryActa);
+
+                            var remoteDetailActaRows = fileName.Tables[0].Rows.Cast<DataRow>().Where(detailDrs => (int)detailDrs["DeliveryActaId"] == remoteActaId).ToList();
+                           
+
+                            foreach (DataRow detailDr in remoteDetailActaRows)
+                            {
+                                long tel = (long)detailDr["TelMovil"];
+                                string img1 = detailDr["Imagedocl"].ToString();
+                                string img2 = detailDr["Imagedoc2"].ToString();
+                                DateTime date = Convert.ToDateTime(detailDr["FechaActualización"]);
+
+
+                            DetailsDelivery  newDetailsdeliveryActa = new DetailsDelivery()
+                                    {
+                                        DeliveryActa = newOrUpdatedDeliveryActa,
+                                        TelMovil = tel,
+                                        Imagedocl = img1,
+                                        Imagedoc2 = img2,
+                                        
+                                        FechaActualización = date
+
+                                    };
+
+
+                                newOrUpdatedDeliveryActa.DetailsDeliveries.Add(newDetailsdeliveryActa);
+                              
+                            }
 
                             contadorSave++;
                         }
@@ -432,6 +470,7 @@ namespace Pae.web.Controllers
 
 
         }
+      
         public async Task<IActionResult> PostStudentList(int? id)
         {
             if (id == null)

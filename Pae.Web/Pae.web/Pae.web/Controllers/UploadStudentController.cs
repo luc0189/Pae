@@ -104,11 +104,12 @@ namespace Pae.web.Controllers
                             {
                                 exits.NOrden= $"{exits.NOrden}, {nOder}";
                                 exits.Document = exits.Document;
+                                exits.sedes2 = $"{exits.sedes2},{reader.GetValue(5).ToString()}";
                                 exits.Sedes = await _dataContext.Sedes.FirstAsync(o => o.NameSedes == reader.GetValue(5).ToString());
                                 exits.FullName = exits.FullName;
                                 exits.AcudienteName = exits.AcudienteName;
                                 exits.DocumentAcu = exits.DocumentAcu;
-                             
+                                
                                 exits.AutDelivery = $"{exits.AutDelivery}, {autorized}";
                                 exits.Mesas = $"{exits.Mesas}, {mesa}";
                                 exits.Jornada = exits.Jornada;
